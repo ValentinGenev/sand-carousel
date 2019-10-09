@@ -1,16 +1,20 @@
+@charset "UTF-8";
 @font-face {
-  font-family: 'fontello';
+  font-family: "fontello";
   src: url("../../fontello/fontello.eot?54143292");
   src: url("../../fontello/fontello.eot?54143292#iefix") format("embedded-opentype"), url("../../fontello/fontello.woff2?54143292") format("woff2"), url("../../fontello/fontello.woff?54143292") format("woff"), url("../../fontello/fontello.ttf?54143292") format("truetype"), url("../../fontello/fontello.svg?54143292#fontello") format("svg");
   font-weight: normal;
-  font-style: normal; }
+  font-style: normal;
+}
 /* Chrome hack: SVG is rendered more smooth in Windozze. 100% magic, uncomment if you need it. */
 /* Note, that will break hinting! In other OS-es font will be not as sharp as it could be */
 @media screen and (-webkit-min-device-pixel-ratio: 0) {
   @font-face {
-    font-family: 'fontello';
-    src: url("../fontello/fontello.svg?54143292#fontello") format("svg"); } }
-[class^="icon-"]:before, [class*=" icon-"]:before {
+    font-family: "fontello";
+    src: url("../fontello/fontello.svg?54143292#fontello") format("svg");
+  }
+}
+[class^=icon-]:before, [class*=" icon-"]:before {
   font-family: "fontello";
   font-style: normal;
   font-weight: normal;
@@ -18,7 +22,7 @@
   display: inline-block;
   text-decoration: inherit;
   width: 1em;
-  margin-right: .2em;
+  margin-right: 0.2em;
   text-align: center;
   /* opacity: .8; */
   /* For safety - reset parent styles, that can break glyph codes*/
@@ -28,20 +32,62 @@
   line-height: 1em;
   /* Animation center compensation - margins should be symmetric */
   /* remove if not needed */
-  margin-left: .2em;
+  margin-left: 0.2em;
   /* you can be more comfortable with increased icons size */
   /* font-size: 120%; */
   /* Font smoothing. That was taken from TWBS */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   /* Uncomment for 3D effect */
-  /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */ }
+  /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
+}
 
 .icon-angle-left:before {
-  content: '\f104'; }
+  content: "";
+}
 
 .icon-angle-right:before {
-  content: '\f105'; }
+  content: "";
+}
+
+/****************************************************
+ * Helper Classes:									*
+ ****************************************************/
+.screen-reader-text {
+  border: 0;
+  clip: rect(1px, 1px, 1px, 1px);
+  clip-path: inset(50%);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute !important;
+  width: 1px;
+  word-wrap: normal !important;
+  /* Many screen reader and browser combinations announce broken words as they would appear visually. */
+}
+
+.screen-reader-text:focus {
+  background-color: #f1f1f1;
+  border-radius: 3px;
+  box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.6);
+  clip: auto !important;
+  clip-path: none;
+  color: #21759b;
+  display: block;
+  font-size: 14px;
+  font-size: 0.875rem;
+  font-weight: bold;
+  height: auto;
+  left: 5px;
+  line-height: normal;
+  padding: 15px 23px 14px;
+  text-decoration: none;
+  top: 5px;
+  width: auto;
+  z-index: 100000;
+  /* Above WP toolbar. */
+}
 
 /****************************************************
  * Sand Slider:										*
@@ -51,62 +97,75 @@
   width: 100%;
   height: 480px;
   margin: 0 auto;
-  overflow: hidden; }
-  .sand-slider ul {
-    margin: 0;
-    padding: 0;
-    list-style: none; }
-    .sand-slider ul li {
-      margin: 0; }
-      .sand-slider ul li figure {
-        position: relative;
-        flex-grow: 1; }
-        .sand-slider ul li figure img {
-          position: absolute;
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-          object-position: center; }
-  .sand-slider #slides {
-    background-color: inherit; }
-  .sand-slider .slide {
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    z-index: 1;
-    background-color: inherit; }
-  .sand-slider .slide.active {
-    z-index: 2 !important; }
+  overflow: hidden;
+}
+.sand-slider ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.sand-slider ul li {
+  margin: 0;
+}
+.sand-slider ul li figure {
+  position: relative;
+  flex-grow: 1;
+}
+.sand-slider ul li figure img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+.sand-slider #slides {
+  background-color: inherit;
+}
+.sand-slider .slide {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  background-color: inherit;
+}
+.sand-slider .slide.active {
+  z-index: 2 !important;
+}
 
 .sand-slider.fading .slide {
   opacity: 0;
-  transition: opacity .35s .35s; }
+  transition: opacity 0.35s 0.35s;
+}
 .sand-slider.fading .slide.active {
   opacity: 1;
-  transition: opacity .35s; }
+  transition: opacity 0.35s;
+}
 .sand-slider.fading #controls {
   position: absolute;
   display: flex;
-  bottom: .5rem;
+  bottom: 0.5rem;
   left: 50%;
   margin: 0;
   padding: 0;
   transform: translateX(-50%);
-  z-index: 3; }
-  .sand-slider.fading #controls li {
-    width: 1rem;
-    height: 1rem;
-    margin: .5rem;
-    border: 1px solid #fff;
-    border-radius: 50%;
-    box-sizing: border-box;
-    cursor: pointer; }
-  .sand-slider.fading #controls li.active {
-    background-color: #fff; }
+  z-index: 3;
+}
+.sand-slider.fading #controls li {
+  width: 1rem;
+  height: 1rem;
+  margin: 0.5rem;
+  border: 1px solid #fff;
+  border-radius: 50%;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+.sand-slider.fading #controls li.active {
+  background-color: #fff;
+}
 .sand-slider.fading .slide.active:after {
   content: "";
   display: block;
@@ -119,22 +178,30 @@
   z-index: 3;
   animation-name: fillUp;
   animation-duration: 5s;
-  animation-timing-function: linear; }
+  animation-timing-function: linear;
+}
 @keyframes fillUp {
   to {
-    width: 100%; } }
+    width: 100%;
+  }
+}
+
 .sand-slider.sliding .slide {
   opacity: 1;
-  transition: transform .5s ease-in-out; }
+  transition: transform 0.5s ease-in-out;
+}
 .sand-slider.sliding .current-slide {
   transform: translateX(0);
-  z-index: 2; }
+  z-index: 2;
+}
 .sand-slider.sliding .previous-slide {
   transform: translateX(-100%);
-  z-index: 1; }
+  z-index: 1;
+}
 .sand-slider.sliding .next-slide {
   transform: translateX(100%);
-  z-index: 1; }
+  z-index: 1;
+}
 .sand-slider.sliding .slider-controls {
   position: absolute;
   width: 2.5rem;
@@ -145,22 +212,28 @@
   background-color: #fff;
   border: none;
   cursor: pointer;
-  z-index: 3; }
+  z-index: 3;
+}
 .sand-slider.sliding .previous-button {
-  border-radius: 0 .5rem .5rem 0; }
+  border-radius: 0 0.5rem 0.5rem 0;
+}
 .sand-slider.sliding .next-button {
   right: 0;
-  border-radius: .5rem 0 0 .5rem; }
+  border-radius: 0.5rem 0 0 0.5rem;
+}
 .sand-slider.sliding .previous-button:after,
 .sand-slider.sliding .next-button:after {
-  font-family: 'fontello';
-  font-size: 1.5rem; }
+  font-family: "fontello";
+  font-size: 1.5rem;
+}
 .sand-slider.sliding .previous-button:after {
-  content: '\f104';
-  margin-left: -.15em; }
+  content: "";
+  margin-left: -0.15em;
+}
 .sand-slider.sliding .next-button:after {
-  content: '\f105';
-  margin-left: .15em; }
+  content: "";
+  margin-left: 0.15em;
+}
 .sand-slider.sliding .slide.current-slide:after {
   content: "";
   display: block;
@@ -173,9 +246,12 @@
   z-index: 3;
   animation-name: fillUp;
   animation-duration: 5s;
-  animation-timing-function: linear; }
+  animation-timing-function: linear;
+}
 @keyframes fillUp {
   to {
-    width: 100%; } }
+    width: 100%;
+  }
+}
 
 /*# sourceMappingURL=sand-carousel.css.map */

@@ -49,8 +49,8 @@ class SandSlider {
         slider.classList.add("fading");
  
         // The controls
-        let contorlsContainer = document.createElement("ul");
-        contorlsContainer.id = "controls";
+        let contorlsContainer       = document.createElement("ul");
+        contorlsContainer.className = "controls";
  
         if (slides.length > 1) slides.forEach((_slide, key) => {
             let controlsItem = document.createElement("li");
@@ -61,7 +61,7 @@ class SandSlider {
         });
         slider.appendChild(contorlsContainer);
  
-        this.controlsItemsSetter = document.querySelectorAll("#controls li");
+        this.controlsItemsSetter = document.querySelectorAll(".controls li");
  
         // Initial slide:
         changeSlide(1);

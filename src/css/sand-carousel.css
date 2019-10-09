@@ -92,36 +92,36 @@
 /****************************************************
  * Sand Slider:										*
  ****************************************************/
-.sand-slider {
+.sand-carousel {
   position: relative;
   width: 100%;
   height: 480px;
   margin: 0 auto;
   overflow: hidden;
 }
-.sand-slider ul {
+.sand-carousel ul {
   margin: 0;
   padding: 0;
   list-style: none;
 }
-.sand-slider ul li {
+.sand-carousel ul li {
   margin: 0;
 }
-.sand-slider ul li figure {
+.sand-carousel ul li figure {
   position: relative;
   flex-grow: 1;
 }
-.sand-slider ul li figure img {
+.sand-carousel ul li figure img {
   position: absolute;
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center;
 }
-.sand-slider #slides {
+.sand-carousel .slides {
   background-color: inherit;
 }
-.sand-slider .slide {
+.sand-carousel .slide {
   position: absolute;
   display: flex;
   flex-direction: column;
@@ -130,21 +130,21 @@
   top: 0;
   left: 0;
   z-index: 1;
-  background-color: inherit;
+  background-color: #fff;
 }
-.sand-slider .slide.active {
+.sand-carousel .slide.active {
   z-index: 2 !important;
 }
 
-.sand-slider.fading .slide {
+.sand-carousel.fading .slide {
   opacity: 0;
   transition: opacity 0.35s 0.35s;
 }
-.sand-slider.fading .slide.active {
+.sand-carousel.fading .slide.active {
   opacity: 1;
   transition: opacity 0.35s;
 }
-.sand-slider.fading #controls {
+.sand-carousel.fading .controls {
   position: absolute;
   display: flex;
   bottom: 0.5rem;
@@ -154,7 +154,7 @@
   transform: translateX(-50%);
   z-index: 3;
 }
-.sand-slider.fading #controls li {
+.sand-carousel.fading .controls li {
   width: 1rem;
   height: 1rem;
   margin: 0.5rem;
@@ -163,10 +163,10 @@
   box-sizing: border-box;
   cursor: pointer;
 }
-.sand-slider.fading #controls li.active {
+.sand-carousel.fading .controls li.active {
   background-color: #fff;
 }
-.sand-slider.fading .slide.active:after {
+.sand-carousel.fading .slide.active:after {
   content: "";
   display: block;
   position: absolute;
@@ -186,23 +186,23 @@
   }
 }
 
-.sand-slider.sliding .slide {
+.sand-carousel.sliding .slide {
   opacity: 1;
   transition: transform 0.5s ease-in-out;
 }
-.sand-slider.sliding .current-slide {
+.sand-carousel.sliding .current-slide {
   transform: translateX(0);
   z-index: 2;
 }
-.sand-slider.sliding .previous-slide {
+.sand-carousel.sliding .previous-slide {
   transform: translateX(-100%);
   z-index: 1;
 }
-.sand-slider.sliding .next-slide {
+.sand-carousel.sliding .next-slide {
   transform: translateX(100%);
   z-index: 1;
 }
-.sand-slider.sliding .slider-controls {
+.sand-carousel.sliding .slider-controls {
   position: absolute;
   width: 2.5rem;
   height: 2.5rem;
@@ -214,27 +214,27 @@
   cursor: pointer;
   z-index: 3;
 }
-.sand-slider.sliding .previous-button {
+.sand-carousel.sliding .previous-button {
   border-radius: 0 0.5rem 0.5rem 0;
 }
-.sand-slider.sliding .next-button {
+.sand-carousel.sliding .next-button {
   right: 0;
   border-radius: 0.5rem 0 0 0.5rem;
 }
-.sand-slider.sliding .previous-button:after,
-.sand-slider.sliding .next-button:after {
+.sand-carousel.sliding .previous-button:after,
+.sand-carousel.sliding .next-button:after {
   font-family: "fontello";
   font-size: 1.5rem;
 }
-.sand-slider.sliding .previous-button:after {
+.sand-carousel.sliding .previous-button:after {
   content: "";
   margin-left: -0.15em;
 }
-.sand-slider.sliding .next-button:after {
+.sand-carousel.sliding .next-button:after {
   content: "";
   margin-left: 0.15em;
 }
-.sand-slider.sliding .slide.current-slide:after {
+.sand-carousel.sliding .slide.current-slide:after {
   content: "";
   display: block;
   position: absolute;

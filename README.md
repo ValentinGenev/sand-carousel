@@ -1,10 +1,10 @@
 # Sand Carousel
 A simple JavaScript carousel.
+
 **WARNING** the project is still in development.
 
 ## About
-My main goal is to make a very simple and light carousel that I can use for my projects. There are still quite a few things that I would like to change.
-I used vanilla JavaScipt for the initiation and the options and CSS for the animation.
+My main goal is to make a very simple and light carousel that I can use for my projects. There are still quite a few things that I would like to change. I used vanilla JavaScipt for the initiation and the options, and CSS for the animation.
 
 ## Usage
 1. Link the stylesheet and the script files from the dist folder:

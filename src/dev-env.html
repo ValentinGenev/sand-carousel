@@ -1,0 +1,43 @@
+<!doctype html>
+<html class="no-js" lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        <title>Sand Carousel Demo</title>
+
+        <link rel="stylesheet" href="./css/sand-carousel.css">
+
+        <!-- Demo styles -->
+        <style>
+
+        </style>
+    </head>
+
+    <body>
+        <h1>Simple slider</h1>
+
+        <section class="sand-carousel">
+            <h1 class="screen-reader-text">Slider</h1>
+
+            <ul class="slides">
+                <li class="slide">Slide 1</li>
+                <li class="slide">Slide 2</li>
+                <li class="slide">Slide 3</li>
+            </ul>
+        </section>
+
+        <script src="./js/sand-carousel.js"></script>
+
+        <!-- Demo script; Sand carousel initiations -->
+        <script>
+            window.addEventListener("load", () => {
+                const SLIDER			= document.querySelector(".sand-carousel");
+                const SLIDES			= document.querySelectorAll(".slide");
+                const SAND_SLIDER       = new SandSlider(SLIDER, SLIDES, 5000, 350);
+                SAND_SLIDER.arrowControls();
+            });
+        </script>
+    </body>
+</html>

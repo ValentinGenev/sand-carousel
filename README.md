@@ -28,11 +28,11 @@ I used vanilla JavaScipt for the initiation and the options and CSS for the anim
 ```
 3. Initiate the carousel by declaring a new instance of the `SandCarousel` class:
 ```js
-let containerSelector	= ".sand-carousel";
+let containerSelector   = ".sand-carousel";
 let singleSlideSelector	= ".slide";
-let slideDuration		= 6000;
+let slideDuration       = 6000;
 let transitionDuration	= 500;	// 500ms by dafault
-let autoPlay			= true; // true by default
+let autoPlay            = true; // true by default
 
 const SAND_SLIDER = new SandCarousel(containerSelector, singleSlideSelector, slideDuration, transitionDuration, autoPlay);
 ```

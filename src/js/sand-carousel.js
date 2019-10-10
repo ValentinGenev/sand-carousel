@@ -1,15 +1,15 @@
 class SandSlider {
     /** 
-     * @param {Node} slider the container of the slider
-     * @param {NodeList} slides a NodeList or an array of the slides
+     * @param {string} slider a string of the selector for the slider
+     * @param {string} slides a string of the selector for the slided
      * @param {number} slideDuration the time it takes for the slide change animation to finish (see the transitions in the CSS file)
      * @param {number} animationDuration 
      * @param {boolean} autoplay 
      */
     constructor(slider, slides, slideDuration, animationDuration, autoplay = true) {
-        this.slider             = slider;
-        this.slides             = slides;
-        this.slideClass         = slides[0].className;
+        this.slider             = document.querySelector(slider);
+        this.slides             = document.querySelectorAll(slides);
+        this.slideClass         = this.slides[0].className;
         this.slideDuration      = slideDuration;
         this.animationDuration  = animationDuration;
         this.autoplay           = autoplay;

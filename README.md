@@ -1,4 +1,4 @@
-# sand-carousel
+# Sand Carousel
 A simple JavaScript carousel.
 **WARNING** the project is still in development.
 
@@ -9,21 +9,21 @@ I used vanilla JavaScipt for the initiation and the options and CSS for the anim
 ## Usage
 1. Link the stylesheet and the script files from the dist folder:
 ```html
-	<link rel="stylesheet" href="sand-carousel.css">
+    <link rel="stylesheet" href="sand-carousel.css">
 </head>
 <body>
-	...
-	<script src="sand-carousel.js"></script>
+    ...
+    <script src="sand-carousel.js"></script>
 </body>
 ```
 2. The markup should look something like this:
 ```html
 <div class="sand-carousel">
-	<ul>
-		<li class="slide">Slide 1</li>
-		<li class="slide">Slide 2</li>
-		<li class="slide">Slide 3</li>
-	</ul>
+    <ul>
+        <li class="slide">Slide 1</li>
+        <li class="slide">Slide 2</li>
+        <li class="slide">Slide 3</li>
+    </ul>
 </div>
 ```
 3. Initiate the carousel by declaring a new instance of the `SandCarousel` class:

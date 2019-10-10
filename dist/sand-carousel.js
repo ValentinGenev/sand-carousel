@@ -16,7 +16,7 @@ class SandCarousel {
         this.currentSlide       = 0;
  
         // Dotted control items:
-        this.controlDots		= [];
+        this.controlDots        = [];
  
         // The timeout variable:
         this.theLoop            = undefined;
@@ -25,7 +25,7 @@ class SandCarousel {
         this.initTheCarousel    = this.initTheCarousel.bind(this);
         this.changeSlide        = this.changeSlide.bind(this);
         this.startLoop          = this.startLoop.bind(this);
-		this.createArrowIcon	= this.createArrowIcon.bind(this);
+        this.createArrowIcon    = this.createArrowIcon.bind(this);
     }
  
     set slidesSetter(items) {
@@ -65,7 +65,7 @@ class SandCarousel {
  
         this.controlDotsSetter = document.querySelectorAll(".controls li");
 
-		initTheCarousel();
+        initTheCarousel();
     }
  
     /**
@@ -81,12 +81,12 @@ class SandCarousel {
         let nextSlideBtn = document.createElement("button");
         nextSlideBtn.className = "carousel-controls next-button";
         nextSlideBtn.addEventListener("click", throttle(() => changeSlide(1), animationDuration));
-		createArrowIcon(nextSlideBtn);
+        createArrowIcon(nextSlideBtn);
  
         let previousSlideBtn = document.createElement("button");
         previousSlideBtn.className = "carousel-controls previous-button";
         previousSlideBtn.addEventListener("click", throttle(() => changeSlide(-1), animationDuration));
-		createArrowIcon(previousSlideBtn);
+        createArrowIcon(previousSlideBtn);
  
         carousel.appendChild(nextSlideBtn);
         carousel.appendChild(previousSlideBtn);
@@ -106,28 +106,28 @@ class SandCarousel {
             this.slidesSetter = slides[0].parentNode.querySelectorAll(".slide");
         }
 
-		initTheCarousel();
+        initTheCarousel();
     }
 
-	/**
-	 * Initiates the carousel
-	 */
-	initTheCarousel() {
+    /**
+     * Initiates the carousel
+     */
+    initTheCarousel() {
         const { slides, slideDuration, animationDuration, autoplay, changeSlide, startLoop } = this;
-		
-		if (slides.length > 1) {
-			// Sets the animation duration for the timer to the slide duration
-			slides.forEach(slide => {
-				slide.style.animationDuration	= slideDuration / 1000 + 's';
-				slide.style.transitionDuration	= animationDuration / 1000 + 's';
-				slide.style.transitionDelay		= animationDuration / 1000 + 's';
-			});
+        
+        if (slides.length > 1) {
+            // Sets the animation duration for the timer to the slide duration
+            slides.forEach(slide => {
+                slide.style.animationDuration    = slideDuration / 1000 + 's';
+                slide.style.transitionDuration    = animationDuration / 1000 + 's';
+                slide.style.transitionDelay        = animationDuration / 1000 + 's';
+            });
 
-			// Initial slide:
-			changeSlide(1);
-			if (autoplay) startLoop();
-		}
-	}
+            // Initial slide:
+            changeSlide(1);
+            if (autoplay) startLoop();
+        }
+    }
  
     /**
      * Starts the loop
@@ -200,35 +200,35 @@ class SandCarousel {
         else return index + direction;
     }
 
-	/**
-	 * Resets the className to a given string
-	 * 
-	 * @param {NodeList} elements
-	 * @param {string} className 
-	 */
+    /**
+     * Resets the className to a given string
+     * 
+     * @param {NodeList} elements
+     * @param {string} className 
+     */
     resetClasses(elements, className) {
         elements.forEach(element => element.className = className);
     }
 
-	/**
-	 * Creates a SVG element and appends it to an element
-	 * 
-	 * @param {Node} element
-	 */
-	createArrowIcon(element) {
-		let arrowIcon = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-		arrowIcon.setAttributeNS("http://www.w3.org/2000/xmlns/", "xmlns:xlink", "http://www.w3.org/1999/xlink");
-		arrowIcon.setAttribute("x", "0px");
-		arrowIcon.setAttribute("y", "0px");
-		arrowIcon.setAttribute("viewBox", "0 0 32 55");
-		arrowIcon.setAttribute("style", "enable-background: new 0 0 32 55;");
+    /**
+     * Creates a SVG element and appends it to an element
+     * 
+     * @param {Node} element
+     */
+    createArrowIcon(element) {
+        let arrowIcon = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+        arrowIcon.setAttributeNS("http://www.w3.org/2000/xmlns/", "xmlns:xlink", "http://www.w3.org/1999/xlink");
+        arrowIcon.setAttribute("x", "0px");
+        arrowIcon.setAttribute("y", "0px");
+        arrowIcon.setAttribute("viewBox", "0 0 32 55");
+        arrowIcon.setAttribute("style", "enable-background: new 0 0 32 55;");
 
-		let thePath = document.createElementNS("http://www.w3.org/2000/svg", 'path');
-		thePath.setAttribute("d", "M2.985,0.579L0.581,2.973c-0.775,0.772-0.775,2.024,0,2.796L22.401,27.5L0.581,49.232c-0.775,0.772-0.775,2.024,0,2.796 l2.403,2.394c0.775,0.772,2.032,0.772,2.807,0l25.627-25.523c0.775-0.772,0.775-2.024,0-2.796L5.792,0.579 C5.017-0.193,3.76-0.193,2.985,0.579z");
+        let thePath = document.createElementNS("http://www.w3.org/2000/svg", 'path');
+        thePath.setAttribute("d", "M2.985,0.579L0.581,2.973c-0.775,0.772-0.775,2.024,0,2.796L22.401,27.5L0.581,49.232c-0.775,0.772-0.775,2.024,0,2.796 l2.403,2.394c0.775,0.772,2.032,0.772,2.807,0l25.627-25.523c0.775-0.772,0.775-2.024,0-2.796L5.792,0.579 C5.017-0.193,3.76-0.193,2.985,0.579z");
 
-		arrowIcon.appendChild(thePath);
-		element.appendChild(arrowIcon);
-	}
+        arrowIcon.appendChild(thePath);
+        element.appendChild(arrowIcon);
+    }
  
     /**
      * The throttle function

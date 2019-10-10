@@ -99,7 +99,7 @@
 
 
 /****************************************************
- * Sand Slider:										*
+ * Sand Carousel:									*
  ****************************************************/
 .sand-carousel {
 	position: relative;
@@ -130,10 +130,6 @@
 			}
 		}
 	}
- 
-	.slides {
-		background-color: inherit;
-	}
 
 	// Slide styles
 	.slide {
@@ -146,11 +142,35 @@
 		left: 0;
 		z-index: 1;
 		background-color: #fff;
+
+		// The timer pseudo-element will inherit
+		// its duration from this property.
+		animation-duration: 5s;
 	}
 	.slide.active {
 		z-index: 2 !important;
 	}
+
+	// Timer
+	.slide:after {
+		display: block;
+		position: absolute;
+		width: 0;
+		height: 2px;
+		left: 0;
+		bottom: 0;
+		background-color: rgba(0, 0, 0, .15);
+		z-index: 3;
+		
+		animation-name: fill;
+		animation-duration: inherit;
+		animation-timing-function: linear;
+	}
+	@keyframes fill {
+		to { width: 100% }
+	}
 }
+
 
 // Slider — Fading Animation:
 .sand-carousel.fading {
@@ -190,23 +210,9 @@
 	// Timer
 	.slide.active:after {
 		content: "";
-		display: block;
-		position: absolute;
-		width: 0;
-		height: 2px;
-		left: 0;
-		bottom: 0;
-		background-color: rgba(0, 0, 0, .15);
-		z-index: 3;
- 
-		animation-name: fillUp;
-		animation-duration: 5s;
-		animation-timing-function: linear;
-	}
-	@keyframes fillUp {
-		to { width: 100% }
 	}
 }
+
 
 // Slider — Sliding Animation:
 .sand-carousel.sliding {	
@@ -266,20 +272,5 @@
 	// Timer
 	.slide.current-slide:after {
 		content: "";
-		display: block;
-		position: absolute;
-		width: 0;
-		height: 2px;
-		left: 0;
-		bottom: 0;
-		background-color: rgba(0, 0, 0, .15);
-		z-index: 3;
- 
-		animation-name: fillUp;
-		animation-duration: 5s;
-		animation-timing-function: linear;
-	}
-	@keyframes fillUp {
-		to { width: 100% }
 	}
 }

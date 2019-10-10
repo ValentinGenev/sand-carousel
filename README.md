@@ -9,6 +9,7 @@ My main goal is to make a very simple and light carousel that I can use for my p
 ## Usage
 1. Link the stylesheet and the script files from the dist folder:
 ```html
+    ...
     <link rel="stylesheet" href="sand-carousel.css">
 </head>
 <body>

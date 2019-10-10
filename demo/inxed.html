@@ -6,22 +6,50 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         
         <title>Sand Carousel Demo</title>
+		<link href="https://fonts.googleapis.com/css?family=Lato:400,700&display=swap" rel="stylesheet">
 
+		<!-- The Sand Carousel stylesheet -->
         <link rel="stylesheet" href="../dist/sand-carousel.css">
 
         <!-- Demo styles -->
         <style>
+			body {
+				margin: 0;
+				font-family: 'Lato', Arial, Helvetica, sans-serif;
+				font-size: 18px;
+				background-color: #f9f9f9;
+			}
 
+			/**
+			 * The sand Carousel overwrites
+			 * 
+			 * Please note that you need to use specific
+			 * selectors to overwrite the slides.
+			 * The original styles were written that way
+			 * to prevent unwanted overwrites.
+			 */
+			.sand-carousel .slide {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				font-size: 2rem;
+				background-color: #f1d4d4;
+			}
+			.sand-carousel .slide:nth-of-type(2n) {
+				background-color: #ddb6c6;
+			}
+			.sand-carousel .slide:nth-of-type(3n) {
+				color: #fff;
+				background-color: #ac8daf;
+			}
         </style>
     </head>
 
     <body>
-        <h1>Simple slider</h1>
-
         <section class="sand-carousel">
             <h1 class="screen-reader-text">Slider</h1>
 
-            <ul class="slides">
+            <ul>
                 <li class="slide">Slide 1</li>
                 <li class="slide">Slide 2</li>
                 <li class="slide">Slide 3</li>
@@ -30,13 +58,13 @@
 
         <script src="../dist/sand-carousel.js"></script>
 
-        <!-- Demo script; Sand carousel initiations -->
+        <!-- Sand Carousel initiations -->
         <script>
             window.addEventListener("load", () => {
-                const SLIDER			= document.querySelector(".sand-carousel");
-                const SLIDES			= document.querySelectorAll(".slide");
-                const SAND_SLIDER       = new SandSlider(SLIDER, SLIDES, 5000, 350);
-                SAND_SLIDER.arrowControls();
+                const SAND_SLIDER = new SandCarousel(".sand-carousel", ".slide", 6000, 500);
+
+                // SAND_SLIDER.arrowControls();
+				SAND_SLIDER.dotControls();
             });
         </script>
     </body>

@@ -1,29 +1,31 @@
-class SandSlider {
+class SandCarousel {
     /** 
-     * @param {Node} slider the container of the slider
-     * @param {NodeList} slides a NodeList or an array of the slides
+     * @param {string} carousel a string of the selector for the carousel
+     * @param {string} slides a string of the selector for the slided
      * @param {number} slideDuration the time it takes for the slide change animation to finish (see the transitions in the CSS file)
      * @param {number} animationDuration 
      * @param {boolean} autoplay 
      */
-    constructor(slider, slides, slideDuration, animationDuration, autoplay = true) {
-        this.slider             = slider;
-        this.slides             = slides;
-        this.slideClass         = slides[0].className;
+    constructor(carousel, slides, slideDuration, animationDuration = 500, autoplay = true) {
+        this.carousel             = document.querySelector(carousel);
+        this.slides             = document.querySelectorAll(slides);
+        this.slideClass         = this.slides[0].className;
         this.slideDuration      = slideDuration;
         this.animationDuration  = animationDuration;
         this.autoplay           = autoplay;
         this.currentSlide       = 0;
  
         // Dotted control items:
-        this.controlsItems      = [];
+        this.controlDots		= [];
  
         // The timeout variable:
         this.theLoop            = undefined;
  
         // Binding this:
+        this.initTheCarousel    = this.initTheCarousel.bind(this);
         this.changeSlide        = this.changeSlide.bind(this);
         this.startLoop          = this.startLoop.bind(this);
+		this.createArrowIcon	= this.createArrowIcon.bind(this);
     }
  
     set slidesSetter(items) {
@@ -32,25 +34,25 @@ class SandSlider {
     set currentSlideSetter(index) {
         this.currentSlide = index;
     }
-    set controlsItemsSetter(items) {
-        this.controlsItems = items;
+    set controlDotsSetter(items) {
+        this.controlDots = items;
     }
     set theLoopSetter(loop) {
         this.theLoop = loop;
     }
  
     /**
-     * Initiates the slider with dot controls and fade animation
+     * Initiates the carousel with dot controls and fade animation
      */
     dotControls() {
-        const { slider, slides, animationDuration, autoplay, changeSlide, startLoop, throttle } = this;
+        const { carousel, slides, animationDuration, initTheCarousel, changeSlide, throttle } = this;
  
         // The animation:
-        slider.classList.add("fading");
+        carousel.classList.add("fading");
  
         // The controls
-        let contorlsContainer = document.createElement("ul");
-        contorlsContainer.id = "controls";
+        let contorlsContainer       = document.createElement("ul");
+        contorlsContainer.className = "controls";
  
         if (slides.length > 1) slides.forEach((_slide, key) => {
             let controlsItem = document.createElement("li");
@@ -59,35 +61,35 @@ class SandSlider {
  
             contorlsContainer.appendChild(controlsItem);
         });
-        slider.appendChild(contorlsContainer);
+        carousel.appendChild(contorlsContainer);
  
-        this.controlsItemsSetter = document.querySelectorAll("#controls li");
- 
-        // Initial slide:
-        changeSlide(1);
-        if (autoplay) startLoop();
+        this.controlDotsSetter = document.querySelectorAll(".controls li");
+
+		initTheCarousel();
     }
  
     /**
-     * Initiates the slider with arrow controls and slide animation
+     * Initiates the carousel with arrow controls and slide animation
      */
     arrowControls() {
-        const { slider, slides, animationDuration, autoplay, changeSlide, startLoop, throttle } = this;
+        const { carousel, slides, animationDuration, initTheCarousel, changeSlide, createArrowIcon, throttle } = this;
  
         // The animation:
-        slider.classList.add("sliding");
+        carousel.classList.add("sliding");
  
         // The controls:
         let nextSlideBtn = document.createElement("button");
-        nextSlideBtn.className = "slider-controls next-button";
+        nextSlideBtn.className = "carousel-controls next-button";
         nextSlideBtn.addEventListener("click", throttle(() => changeSlide(1), animationDuration));
+		createArrowIcon(nextSlideBtn);
  
         let previousSlideBtn = document.createElement("button");
-        previousSlideBtn.className = "slider-controls previous-button";
+        previousSlideBtn.className = "carousel-controls previous-button";
         previousSlideBtn.addEventListener("click", throttle(() => changeSlide(-1), animationDuration));
+		createArrowIcon(previousSlideBtn);
  
-        slider.appendChild(nextSlideBtn);
-        slider.appendChild(previousSlideBtn);
+        carousel.appendChild(nextSlideBtn);
+        carousel.appendChild(previousSlideBtn);
  
         // Temporary fix for slides count equal to 2
         if (slides.length === 2) {
@@ -103,11 +105,29 @@ class SandSlider {
             // Updates the slides' Node List variable with the newly added ones
             this.slidesSetter = slides[0].parentNode.querySelectorAll(".slide");
         }
- 
-        // Initial slide:
-        changeSlide(1);
-        if (autoplay) startLoop();
+
+		initTheCarousel();
     }
+
+	/**
+	 * Initiates the carousel
+	 */
+	initTheCarousel() {
+        const { slides, slideDuration, animationDuration, autoplay, changeSlide, startLoop } = this;
+		
+		if (slides.length > 1) {
+			// Sets the animation duration for the timer to the slide duration
+			slides.forEach(slide => {
+				slide.style.animationDuration	= slideDuration / 1000 + 's';
+				slide.style.transitionDuration	= animationDuration / 1000 + 's';
+				slide.style.transitionDelay		= animationDuration / 1000 + 's';
+			});
+
+			// Initial slide:
+			changeSlide(1);
+			if (autoplay) startLoop();
+		}
+	}
  
     /**
      * Starts the loop
@@ -134,7 +154,7 @@ class SandSlider {
      * @param {number} index the index of the current slide
      */
     changeSlide(direction, index = this.currentSlide) {
-        const { slides, slideClass, autoplay, controlsItems, startLoop, checkIfFirstLast, resetClasses } = this;
+        const { slides, slideClass, autoplay, controlDots, startLoop, checkIfFirstLast, resetClasses } = this;
         const slidesCount = slides.length;
  
         resetClasses(slides, slideClass);
@@ -151,9 +171,9 @@ class SandSlider {
         if (direction === 1) {
             slides[previousSlide].classList.add("active");
  
-            if (controlsItems.length != 0) {
-                resetClasses(controlsItems, "");
-                controlsItems[previousSlide].classList.add("active");
+            if (controlDots.length != 0) {
+                resetClasses(controlDots, "");
+                controlDots[previousSlide].classList.add("active");
             }
         }
         else {
@@ -166,7 +186,7 @@ class SandSlider {
     }
  
     /**
-     * Checks if the current slide is first or rast 
+     * Checks if the current slide is first or rast
      * 
      * @param {number} index current slide
      * @param {number} listCount the number of slides
@@ -179,10 +199,36 @@ class SandSlider {
         else if (index === 0 && direction === -1 ) return listCount - 1;
         else return index + direction;
     }
- 
+
+	/**
+	 * Resets the className to a given string
+	 * 
+	 * @param {NodeList} elements
+	 * @param {string} className 
+	 */
     resetClasses(elements, className) {
         elements.forEach(element => element.className = className);
     }
+
+	/**
+	 * Creates a SVG element and appends it to an element
+	 * 
+	 * @param {Node} element
+	 */
+	createArrowIcon(element) {
+		let arrowIcon = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+		arrowIcon.setAttributeNS("http://www.w3.org/2000/xmlns/", "xmlns:xlink", "http://www.w3.org/1999/xlink");
+		arrowIcon.setAttribute("x", "0px");
+		arrowIcon.setAttribute("y", "0px");
+		arrowIcon.setAttribute("viewBox", "0 0 32 55");
+		arrowIcon.setAttribute("style", "enable-background: new 0 0 32 55;");
+
+		let thePath = document.createElementNS("http://www.w3.org/2000/svg", 'path');
+		thePath.setAttribute("d", "M2.985,0.579L0.581,2.973c-0.775,0.772-0.775,2.024,0,2.796L22.401,27.5L0.581,49.232c-0.775,0.772-0.775,2.024,0,2.796 l2.403,2.394c0.775,0.772,2.032,0.772,2.807,0l25.627-25.523c0.775-0.772,0.775-2.024,0-2.796L5.792,0.579 C5.017-0.193,3.76-0.193,2.985,0.579z");
+
+		arrowIcon.appendChild(thePath);
+		element.appendChild(arrowIcon);
+	}
  
     /**
      * The throttle function
@@ -207,7 +253,6 @@ class SandSlider {
 /**
  * TO DO:
  * 
- * 1.   Stop the slider when the user is not on the page.
+ * 1.   Stop the carousel when the user is not on the page.
  * 2.   Add slide resize option if the slides are different size.
- * 3.   Get the icon classes for the arrow controls out of the script.
  */

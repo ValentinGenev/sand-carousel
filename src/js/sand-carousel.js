@@ -6,7 +6,7 @@ class SandCarousel {
      * @param {number} animationDuration 
      * @param {boolean} autoplay 
      */
-    constructor(carousel, slides, slideDuration, animationDuration, autoplay = true) {
+    constructor(carousel, slides, slideDuration, animationDuration = 500, autoplay = true) {
         this.carousel             = document.querySelector(carousel);
         this.slides             = document.querySelectorAll(slides);
         this.slideClass         = this.slides[0].className;
@@ -16,7 +16,7 @@ class SandCarousel {
         this.currentSlide       = 0;
  
         // Dotted control items:
-        this.controlDots      = [];
+        this.controlDots		= [];
  
         // The timeout variable:
         this.theLoop            = undefined;
@@ -113,11 +113,15 @@ class SandCarousel {
 	 * Initiates the carousel
 	 */
 	initTheCarousel() {
-        const { slides, slideDuration, autoplay, changeSlide, startLoop } = this;
+        const { slides, slideDuration, animationDuration, autoplay, changeSlide, startLoop } = this;
 		
 		if (slides.length > 1) {
 			// Sets the animation duration for the timer to the slide duration
-			slides.forEach(slide => slide.style.animationDuration = slideDuration / 1000 + 's');
+			slides.forEach(slide => {
+				slide.style.animationDuration	= slideDuration / 1000 + 's';
+				slide.style.transitionDuration	= animationDuration / 1000 + 's';
+				slide.style.transitionDelay		= animationDuration / 1000 + 's';
+			});
 
 			// Initial slide:
 			changeSlide(1);
@@ -251,5 +255,4 @@ class SandCarousel {
  * 
  * 1.   Stop the carousel when the user is not on the page.
  * 2.   Add slide resize option if the slides are different size.
- * 3.   Get the icon classes for the arrow controls out of the script.
  */

@@ -53,6 +53,7 @@
             <ul>
                 <li class="slide">Slide 1</li>
                 <li class="slide">Slide 2</li>
+                <li class="slide">Slide 3</li>
             </ul>
         </section>
 
@@ -61,10 +62,10 @@
         <!-- Sand Carousel initiations -->
         <script>
             window.addEventListener("load", () => {
-                const SAND_SLIDER = new SandCarousel(".sand-carousel", ".slide", 6000, 350);
+                const SAND_SLIDER = new SandCarousel(".sand-carousel", ".slide", 6000, 500);
 
-                SAND_SLIDER.arrowControls();
-				// SAND_SLIDER.dotControls();
+                // SAND_SLIDER.arrowControls();
+				SAND_SLIDER.dotControls();
             });
         </script>
     </body>

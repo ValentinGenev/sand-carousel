@@ -89,10 +89,14 @@
     width: 100%; } }
 .sand-carousel.fading .slide {
   opacity: 0;
-  transition: opacity .35s .35s; }
+  transition-property: opacity;
+  transition-duration: .5s;
+  transition-delay: .5s; }
 .sand-carousel.fading .slide.active {
   opacity: 1;
-  transition: opacity .35s; }
+  transition-property: opacity;
+  transition-duration: .5s;
+  transition-delay: 0s !important; }
 .sand-carousel.fading .controls {
   position: absolute;
   display: flex;
@@ -117,7 +121,10 @@
 
 .sand-carousel.sliding .slide {
   opacity: 1;
-  transition: transform .5s ease-in-out; }
+  transition-property: transform;
+  transition-duration: .5s;
+  transition-delay: 0s !important;
+  transition-timing-function: ease-in-out; }
 .sand-carousel.sliding .current-slide {
   transform: translateX(0);
   z-index: 2; }

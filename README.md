@@ -11,7 +11,8 @@ I used vanilla JavaScipt for the initiation and the options and CSS for the anim
 - usage tutorial;
 - review of the code;
 - change the fontello font with a svg;
-- minimize code;
+- minimize the code;
+- lazy loadgin;
 - make the carousel pause on blur (tab change, window change).
 
 ## Known issues

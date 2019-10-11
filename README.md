@@ -32,10 +32,12 @@ My main goal is to make a very simple and light carousel that I can use for my p
 let containerSelector   = ".sand-carousel";
 let singleSlideSelector	= ".slide";
 let slideDuration       = 6000;
-let transitionDuration	= 500;	// 500ms by dafault
-let autoPlay            = true; // true by default
+let transitionDuration	= 500;	 // 500ms by dafault
+let autoPlay            = true;  // true by default
+let resizable			= false; // false by defailt
+//NOTE! autoplay = resizable ? false : autoplay
 
-const SAND_CAROUSEL     = new SandCarousel(containerSelector, singleSlideSelector, slideDuration, transitionDuration, autoPlay);
+const SAND_CAROUSEL     = new SandCarousel(containerSelector, singleSlideSelector, slideDuration, transitionDuration, autoPlay, resizable);
 ```
 3. Then call one of the methods `dotControls()` or `arrowControls()`:
 ```js
@@ -44,7 +46,6 @@ SAND_CAROUSEL.dotControls();
 
 ## To do
 - Review of the code;
-- add slide resize option if the slides are different size.
 - add lazy loadgin.
 
 ## Known issues

@@ -20,6 +20,12 @@
                 background-color: #f9f9f9;
             }
 
+			.some-content {
+				max-width: 768px;
+				margin: 3rem auto;
+				line-height: 1.65em;
+			}
+
             /**
              * The sand Carousel overwrites
              * 
@@ -30,8 +36,11 @@
              */
             .sand-carousel .slide {
                 display: flex;
+				flex-direction: column;
                 justify-content: center;
                 align-items: center;
+				padding: 2rem 4rem;
+				box-sizing: border-box;
                 font-size: 2rem;
 				color: #484c7f;
                 background-color: #f1d4d4;
@@ -43,7 +52,7 @@
                 color: #fff;
                 background-color: #ac8daf;
             }
-			.sand-carousel .controls path {
+			.sand-carousel.sliding .controls svg path {
 				fill: #484c7f;
 			}
         </style>
@@ -54,18 +63,35 @@
             <h1 class="screen-reader-text">Slider</h1>
 
             <ul>
-                <li class="slide">Slide 1</li>
-                <li class="slide">Slide 2</li>
-                <li class="slide">Slide 3</li>
+                <li class="slide">
+					<h2>Slide 1</h2>
+					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum dictum ipsum tellus, vel imperdiet risus mollis at. Sed rutrum pulvinar tortor, id vestibulum mi tristique eget.</p>
+					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum dictum ipsum tellus, vel imperdiet risus mollis at. Sed rutrum pulvinar tortor, id vestibulum mi tristique eget. Ut quis dui et neque dictum laoreet imperdiet vel neque. Vivamus auctor venenatis tristique. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin tempor metus sem, rhoncus vehicula sapien gravida eu. Duis placerat urna quis nisi facilisis fermentum. Duis in mi a ex tempus porttitor. Nam at ultrices ex. Duis aliquam arcu eget orci suscipit, non dignissim ligula consequat. Integer mattis volutpat libero, tempus condimentum tortor blandit eget. Morbi arcu metus, congue ut dictum sit amet, hendrerit ac est. Aenean ornare metus vel nisi faucibus sollicitudin. Sed pharetra eget velit id cursus. Donec porttitor pretium dapibus.</p>
+				</li>
+
+                <li class="slide">
+					<h2>Slide 2</h2>
+					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum dictum ipsum tellus, vel imperdiet risus mollis at. Sed rutrum pulvinar tortor, id vestibulum mi tristique eget. Ut quis dui et neque dictum laoreet imperdiet vel neque. Vivamus auctor venenatis tristique. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin tempor metus sem, rhoncus vehicula sapien gravida eu. Duis placerat urna quis nisi facilisis fermentum. Duis in mi a ex tempus porttitor. Nam at ultrices ex. Duis aliquam arcu eget orci suscipit, non dignissim ligula consequat. Integer mattis volutpat libero, tempus condimentum tortor blandit eget. Morbi arcu metus, congue ut dictum sit amet, hendrerit ac est. Aenean ornare metus vel nisi faucibus sollicitudin. Sed pharetra eget velit id cursus. Donec porttitor pretium dapibus.</p>
+				</li>
+
+                <li class="slide">
+					<h2>Slide 3</h2>
+					<p>Nam odio est, maximus efficitur consequat vitae, pharetra et neque. Aliquam eget justo id nisi suscipit malesuada. Donec leo elit, tempus cursus suscipit a, cursus fringilla massa. Suspendisse suscipit lectus aliquet ex ornare finibus eu vulputate est. Sed erat lorem, fringilla vel venenatis ac, viverra eu lorem. Praesent tempor vitae justo sit amet varius. Sed commodo id augue et aliquam. Praesent laoreet augue non sapien sodales volutpat. Donec ipsum velit, semper id semper in, feugiat a velit. Mauris sed erat a risus accumsan egestas. Quisque consectetur faucibus vestibulum.</p>
+				</li>
             </ul>
         </section>
+
+		<section class="some-content">
+			<h1>This is a sandbox</h1>
+			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum dictum ipsum tellus, vel imperdiet risus mollis at. Sed rutrum pulvinar tortor, id vestibulum mi tristique eget. Ut quis dui et neque dictum laoreet imperdiet vel neque. Vivamus auctor venenatis tristique. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin tempor metus sem, rhoncus vehicula sapien gravida eu. Duis placerat urna quis nisi facilisis fermentum. Duis in mi a ex tempus porttitor. Nam at ultrices ex. Duis aliquam arcu eget orci suscipit, non dignissim ligula consequat. Integer mattis volutpat libero, tempus condimentum tortor blandit eget. Morbi arcu metus, congue ut dictum sit amet, hendrerit ac est. Aenean ornare metus vel nisi faucibus sollicitudin. Sed pharetra eget velit id cursus. Donec porttitor pretium dapibus.</p>
+		</sectiom>
 
         <script src="./js/sand-carousel.js"></script>
 
         <!-- Sand Carousel initiations -->
         <script>
             window.addEventListener("load", () => {
-                const SAND_SLIDER = new SandCarousel(".sand-carousel", ".slide", 5000, 350);
+                const SAND_SLIDER = new SandCarousel(".sand-carousel", ".slide", 5000, 350, true, true);
 
                 SAND_SLIDER.arrowControls();
                 // SAND_SLIDER.dotControls();

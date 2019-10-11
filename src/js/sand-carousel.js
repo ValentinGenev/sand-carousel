@@ -3,16 +3,18 @@ class SandCarousel {
      * @param {string} carousel a string of the selector for the carousel
      * @param {string} slides a string of the selector for the slided
      * @param {number} slideDuration the time it takes for the slide change animation to finish (see the transitions in the CSS file)
-     * @param {number} animationDuration 
-     * @param {boolean} autoplay 
+     * @param {number} animationDuration
+     * @param {boolean} autoplay
+     * @param {boolean} resizable 
      */
-    constructor(carousel, slides, slideDuration, animationDuration = 500, autoplay = true) {
+    constructor(carousel, slides, slideDuration, animationDuration = 500, autoplay = true, resizable = false) {
         this.carousel           = document.querySelector(carousel);
         this.slides             = document.querySelectorAll(slides);
         this.slideClass         = this.slides[0].className;
         this.slideDuration      = slideDuration;
         this.animationDuration  = animationDuration;
-        this.autoplay           = autoplay;
+        this.autoplay           = resizable ? false : autoplay;
+        this.resizable          = resizable;
         this.currentSlide       = 0;
  
         // Dotted control items:
@@ -83,18 +85,18 @@ class SandCarousel {
         carousel.classList.add("sliding");
  
         // The controls:
+        let previousSlideBtn = document.createElement("button");
+        previousSlideBtn.className = "controls sand-controls previous-button";
+        previousSlideBtn.addEventListener("click", throttle(() => changeSlide(-1), animationDuration));
+        createArrowIcon(previousSlideBtn);
+
         let nextSlideBtn = document.createElement("button");
         nextSlideBtn.className = "controls sand-controls next-button";
         nextSlideBtn.addEventListener("click", throttle(() => changeSlide(1), animationDuration));
         createArrowIcon(nextSlideBtn);
  
-        let previousSlideBtn = document.createElement("button");
-        previousSlideBtn.className = "controls sand-controls previous-button";
-        previousSlideBtn.addEventListener("click", throttle(() => changeSlide(-1), animationDuration));
-        createArrowIcon(previousSlideBtn);
- 
-        carousel.appendChild(nextSlideBtn);
         carousel.appendChild(previousSlideBtn);
+        carousel.appendChild(nextSlideBtn);
  
         // Temporary fix for slides count equal to 2
         if (slides.length === 2) {
@@ -118,7 +120,7 @@ class SandCarousel {
      * Initiates the carousel
      */
     initTheCarousel() {
-        const { carousel, slides, slideDuration, animationDuration, changeSlide, setVisibilityAPI } = this;
+        const { carousel, slides, slideDuration, animationDuration, autoplay, resizable, changeSlide, setVisibilityAPI } = this;
         
         if (slides.length > 1) {
             // Sets the animation duration for the timer to the slide duration
@@ -128,11 +130,21 @@ class SandCarousel {
                 slide.style.transitionDelay     = animationDuration / 1000 + 's';
             });
 
-            // This class addition ensured that the class will be removed right away
-            // from the class toggle in startLoop() for the first few seconds (milis.)
-            // of the first slide.
-            carousel.classList.add("disabled");
+            if (resizable) {
+                carousel.classList.add("resizable");
+                carousel.style.transitionDuration = animationDuration / 1000 + 's';
+            }
 
+            if (autoplay) {
+                carousel.classList.add("autoplay");
+
+                // This class addition ensured that the class will be removed right away
+                // from the class toggle in startLoop() for the first few seconds (milis.)
+                // of the first slide.
+                carousel.classList.add("disabled");
+            }
+
+            // Activates the visibility API that detects if the user is on the page
             setVisibilityAPI();
 
             // Initial slide:
@@ -147,7 +159,7 @@ class SandCarousel {
      * @param {number} index the index of the current slide
      */
     changeSlide(direction, index = this.currentSlide) {
-        const { slides, slideClass, autoplay, controlDots, startLoop, checkIfFirstLast, resetClasses } = this;
+        const { carousel, slides, slideClass, autoplay, resizable, controlDots, startLoop, checkIfFirstLast, resetClasses } = this;
         const slidesCount = slides.length;
  
         resetClasses(slides, slideClass);
@@ -172,7 +184,17 @@ class SandCarousel {
         else {
             slides[nextSlide].classList.add("active");
         }
-         
+
+        // Resizes the carousel to the slide's content
+        if (resizable) {
+            if (controlDots.length != 0) {
+                carousel.style.height = slides[previousSlide].offsetHeight + "px";
+            }
+            else {
+                carousel.style.height = slides[currentSlide].offsetHeight + "px";
+            }
+        }
+
         // Resets the loop from the new current slide.
         // This call is part of the recursiuon
         if (autoplay) startLoop();

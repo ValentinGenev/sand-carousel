@@ -87,6 +87,9 @@
 @keyframes fill {
   to {
     width: 100%; } }
+  .sand-carousel.disabled .controls {
+    pointer-events: none; }
+
 .sand-carousel.fading .slide {
   opacity: 0;
   transition-property: opacity;
@@ -134,7 +137,7 @@
 .sand-carousel.sliding .next-slide {
   transform: translateX(100%);
   z-index: 1; }
-.sand-carousel.sliding .carousel-controls {
+.sand-carousel.sliding .controls {
   position: absolute;
   width: 2.5rem;
   height: 2.5rem;
@@ -145,7 +148,7 @@
   border: none;
   cursor: pointer;
   z-index: 3; }
-  .sand-carousel.sliding .carousel-controls svg {
+  .sand-carousel.sliding .controls svg {
     height: 100%;
     width: auto; }
 .sand-carousel.sliding .previous-button {

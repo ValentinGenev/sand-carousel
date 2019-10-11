@@ -43,11 +43,10 @@ SAND_SLIDER.dotControls();
 ```
 
 ## To do
-- Review of the code;
-- lazy loadgin;
-- make the carousel pause on blur (tab change, window change).
+- Make the carousel pause on blur (tab change, window change);
+- review of the code;
+- lazy loadgin.
 
 ## Known issues
-- The buttons aren't disabled during the transition animation;
-- the sliding variation starts from the second slide;
+- The sliding variation starts from the second slide;
 - the carousel doesn't stop when the user changes tabs or the window and the CSS animation causes visual inconsistencies when the user comes back to the page.

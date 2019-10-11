@@ -109,6 +109,12 @@
     @keyframes fill {
         to { width: 100% }
     }
+
+	// Disables the carousel during the transition
+	// animation
+	&.disabled .controls {
+		pointer-events: none;
+	}
 }
 
 
@@ -189,7 +195,7 @@
     }
  
     // Carousel Controls
-    .carousel-controls {
+    .controls {
         position: absolute;
         width: 2.5rem;
         height: 2.5rem;

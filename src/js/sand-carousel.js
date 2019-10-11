@@ -79,12 +79,12 @@ class SandCarousel {
  
         // The controls:
         let nextSlideBtn = document.createElement("button");
-        nextSlideBtn.className = "carousel-controls next-button";
+        nextSlideBtn.className = "controls sand-controls next-button";
         nextSlideBtn.addEventListener("click", throttle(() => changeSlide(1), animationDuration));
         createArrowIcon(nextSlideBtn);
  
         let previousSlideBtn = document.createElement("button");
-        previousSlideBtn.className = "carousel-controls previous-button";
+        previousSlideBtn.className = "controls sand-controls previous-button";
         previousSlideBtn.addEventListener("click", throttle(() => changeSlide(-1), animationDuration));
         createArrowIcon(previousSlideBtn);
  
@@ -113,7 +113,7 @@ class SandCarousel {
      * Initiates the carousel
      */
     initTheCarousel() {
-        const { slides, slideDuration, animationDuration, autoplay, changeSlide, startLoop } = this;
+        const { carousel, slides, slideDuration, animationDuration, autoplay, changeSlide, startLoop } = this;
         
         if (slides.length > 1) {
             // Sets the animation duration for the timer to the slide duration
@@ -123,28 +123,14 @@ class SandCarousel {
                 slide.style.transitionDelay		= animationDuration / 1000 + 's';
             });
 
+			// This class addition ensured that the class will be removed right away
+			// from the class toggle in startLoop() for the first few seconds (milis.)
+			// of the first slide.
+			carousel.classList.add("disabled");
+
             // Initial slide:
             changeSlide(1);
-            if (autoplay) startLoop();
         }
-    }
- 
-    /**
-     * Starts the loop
-     */
-    startLoop() {
-        const { slideDuration, theLoop, changeSlide } = this;
- 
-        // It's important to stop the loop when this
-        // function is called because set function
-        // is called every time a slide is changed no
-        // matter if it's caused by the user or the loop
-        // and if one deosn't stop the loop it will not
-        // be overwritten.
-        if (theLoop) clearTimeout(theLoop)
-     
-        // Loops from the last slide; creates recursion
-        this.theLoopSetter = setTimeout(() => changeSlide(1) , slideDuration);
     }
  
     /**
@@ -183,6 +169,29 @@ class SandCarousel {
         // Resets the loop from the new current slide.
         // This call is part of the recursiuon
         if (autoplay) startLoop();
+    }
+ 
+    /**
+     * Starts the loop
+     */
+    startLoop() {
+        const { carousel, slideDuration, animationDuration, theLoop, changeSlide } = this;
+		
+		// Disables the carousel during the transition animation
+		carousel.classList.toggle("disabled");
+		setTimeout(() => carousel.classList.remove("disabled"), animationDuration);
+
+ 
+        // It's important to stop the loop when this
+        // function is called because set function
+        // is called every time a slide is changed no
+        // matter if it's caused by the user or the loop
+        // and if one deosn't stop the loop it will not
+        // be overwritten.
+        if (theLoop) clearTimeout(theLoop);
+     
+        // Loops from the last slide; creates recursion
+        this.theLoopSetter = setTimeout(() => changeSlide(1) , slideDuration);
     }
  
     /**

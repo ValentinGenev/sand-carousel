@@ -34,7 +34,7 @@ let singleSlideSelector	= ".slide";
 let slideDuration       = 6000;
 let transitionDuration	= 500;	 // 500ms by dafault
 let autoPlay            = true;  // true by default
-let resizable			= false; // false by defailt
+let resizable           = false; // false by defailt
 //NOTE! autoplay = resizable ? false : autoplay
 
 const SAND_CAROUSEL     = new SandCarousel(containerSelector, singleSlideSelector, slideDuration, transitionDuration, autoPlay, resizable);

@@ -20,6 +20,18 @@
                 background-color: #f9f9f9;
             }
 
+			.demo-wrapper {
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				min-height: 100vh;
+			}
+			.demo-title {
+				margin-top: 0;
+				text-align: center;
+				color: #484c7f;
+			}
+
             /**
              * The sand Carousel overwrites
              * 
@@ -33,6 +45,7 @@
                 justify-content: center;
                 align-items: center;
                 font-size: 2rem;
+				color: #484c7f;
                 background-color: #f1d4d4;
             }
             .sand-carousel .slide:nth-of-type(2n) {
@@ -46,25 +59,30 @@
     </head>
 
     <body>
-        <section class="sand-carousel">
-            <h1 class="screen-reader-text">Slider</h1>
+		<div class="demo-wrapper">
+			<h1 class="demo-title">Sand Carousel's demo</h1>
 
-            <ul>
-                <li class="slide">Slide 1</li>
-                <li class="slide">Slide 2</li>
-                <li class="slide">Slide 3</li>
-            </ul>
-        </section>
+			<section class="sand-carousel">
+				<h1 class="screen-reader-text">Slider</h1>
+
+				<ul>
+					<li class="slide">Slide 1</li>
+					<li class="slide">Slide 2</li>
+					<li class="slide">Slide 3</li>
+				</ul>
+			</section>
+
+		</div>
 
         <script src="../dist/sand-carousel.js"></script>
 
         <!-- Sand Carousel initiations -->
         <script>
             window.addEventListener("load", () => {
-                const SAND_SLIDER = new SandCarousel(".sand-carousel", ".slide", 6000, 500);
+                const SAND_CAROUSEL = new SandCarousel(".sand-carousel", ".slide", 6000, 500);
 
-                // SAND_SLIDER.arrowControls();
-                SAND_SLIDER.dotControls();
+                // SAND_CAROUSEL.arrowControls();
+                SAND_CAROUSEL.dotControls();
             });
         </script>
     </body>

@@ -35,18 +35,17 @@ let slideDuration       = 6000;
 let transitionDuration	= 500;	// 500ms by dafault
 let autoPlay            = true; // true by default
 
-const SAND_SLIDER = new SandCarousel(containerSelector, singleSlideSelector, slideDuration, transitionDuration, autoPlay);
+const SAND_CAROUSEL     = new SandCarousel(containerSelector, singleSlideSelector, slideDuration, transitionDuration, autoPlay);
 ```
 3. Then call one of the methods `dotControls()` or `arrowControls()`:
 ```js
-SAND_SLIDER.dotControls();
+SAND_CAROUSEL.dotControls();
 ```
 
 ## To do
-- Make the carousel pause on blur (tab change, window change);
-- review of the code;
-- lazy loadgin.
+- Review of the code;
+- add slide resize option if the slides are different size.
+- add lazy loadgin.
 
 ## Known issues
-- The sliding variation starts from the second slide;
-- the carousel doesn't stop when the user changes tabs or the window and the CSS animation causes visual inconsistencies when the user comes back to the page.
+- The sliding variation starts from the second slide.

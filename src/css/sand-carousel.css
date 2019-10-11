@@ -147,7 +147,11 @@
   background-color: #fff;
   border: none;
   cursor: pointer;
-  z-index: 3; }
+  z-index: 3;
+  opacity: .65;
+  transition: opacity .25s linear; }
+  .sand-carousel.sliding .controls:hover {
+    opacity: 1; }
   .sand-carousel.sliding .controls svg {
     height: 100%;
     width: auto; }

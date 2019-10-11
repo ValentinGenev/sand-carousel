@@ -207,6 +207,14 @@
         cursor: pointer;
         z-index: 3;
 
+		// Ireraction
+		opacity: .65;
+		transition: opacity .25s linear;
+
+		&:hover {
+			opacity: 1;
+		}
+
         svg {
             height: 100%;
             width: auto;

@@ -25,7 +25,7 @@ My main goal is to make a very simple and light carousel that I can use for my p
         <li class="slide">Slide 2</li>
         <li class="slide">Slide 3</li>
     </ul>
-</div>git
+</div>
 ```
 3. Initiate the carousel by declaring a new instance of the `SandCarousel` class:
 ```js

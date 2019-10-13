@@ -33,11 +33,14 @@ let containerSelector   = ".sand-carousel";
 let singleSlideSelector	= ".slide";
 let slideDuration       = 6000;
 let transitionDuration	= 500;	 // 500ms by dafault
-let autoPlay            = true;  // true by default
 let resizable           = false; // false by defailt
-//NOTE! autoplay = resizable ? false : autoplay
+let autoPlay            = true;  // true by default
 
-const SAND_CAROUSEL     = new SandCarousel(containerSelector, singleSlideSelector, slideDuration, transitionDuration, autoPlay, resizable);
+// NOTE! In the constructor the autoplay option is disabled if
+// the slider is resizable
+// autoplay = resizable ? false : autoplay
+
+const SAND_CAROUSEL     = new SandCarousel(containerSelector, singleSlideSelector, slideDuration, transitionDuration, resizable, autoPlay);
 ```
 3. Then call one of the methods `dotControls()` or `arrowControls()`:
 ```js

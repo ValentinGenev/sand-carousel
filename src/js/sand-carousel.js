@@ -7,14 +7,14 @@ class SandCarousel {
      * @param {boolean} autoplay
      * @param {boolean} resizable 
      */
-    constructor(carousel, slides, slideDuration, animationDuration = 500, autoplay = true, resizable = false) {
+    constructor(carousel, slides, slideDuration, animationDuration = 500, resizable = false, autoplay = true) {
         this.carousel           = document.querySelector(carousel);
         this.slides             = document.querySelectorAll(slides);
         this.slideClass         = this.slides[0].className;
         this.slideDuration      = slideDuration;
         this.animationDuration  = animationDuration;
-        this.autoplay           = resizable ? false : autoplay;
         this.resizable          = resizable;
+        this.autoplay           = resizable ? false : autoplay;
         this.currentSlide       = 0;
  
         // Dotted control items:

@@ -3,16 +3,18 @@ class SandCarousel {
      * @param {string} carousel a string of the selector for the carousel
      * @param {string} slides a string of the selector for the slided
      * @param {number} slideDuration the time it takes for the slide change animation to finish (see the transitions in the CSS file)
-     * @param {number} animationDuration 
-     * @param {boolean} autoplay 
+     * @param {number} animationDuration
+     * @param {boolean} autoplay
+     * @param {boolean} resizable 
      */
-    constructor(carousel, slides, slideDuration, animationDuration = 500, autoplay = true) {
-        this.carousel             = document.querySelector(carousel);
+    constructor(carousel, slides, slideDuration, animationDuration = 500, resizable = false, autoplay = true) {
+        this.carousel           = document.querySelector(carousel);
         this.slides             = document.querySelectorAll(slides);
         this.slideClass         = this.slides[0].className;
         this.slideDuration      = slideDuration;
         this.animationDuration  = animationDuration;
-        this.autoplay           = autoplay;
+        this.resizable          = resizable;
+        this.autoplay           = resizable ? false : autoplay;
         this.currentSlide       = 0;
  
         // Dotted control items:
@@ -20,12 +22,15 @@ class SandCarousel {
  
         // The timeout variable:
         this.theLoop            = undefined;
+
+        // Page Visibility API:
+        this.pageIsVisible      = true;
  
         // Binding this:
         this.initTheCarousel    = this.initTheCarousel.bind(this);
         this.changeSlide        = this.changeSlide.bind(this);
         this.startLoop          = this.startLoop.bind(this);
-        this.createArrowIcon    = this.createArrowIcon.bind(this);
+        this.setVisibilityAPI   = this.setVisibilityAPI.bind(this);
     }
  
     set slidesSetter(items) {
@@ -39,6 +44,9 @@ class SandCarousel {
     }
     set theLoopSetter(loop) {
         this.theLoop = loop;
+    }
+    set pageIsVisibleSetter(bool) {
+        this.pageIsVisible = bool;
     }
  
     /**
@@ -57,8 +65,7 @@ class SandCarousel {
         if (slides.length > 1) slides.forEach((_slide, key) => {
             let controlsItem = document.createElement("li");
              
-            controlsItem.addEventListener("click", throttle(() => changeSlide(1, key), animationDuration));
- 
+            controlsItem.addEventListener("click", throttle(() => changeSlide(1, key), animationDuration)); 
             contorlsContainer.appendChild(controlsItem);
         });
         carousel.appendChild(contorlsContainer);
@@ -78,18 +85,18 @@ class SandCarousel {
         carousel.classList.add("sliding");
  
         // The controls:
+        let previousSlideBtn = document.createElement("button");
+        previousSlideBtn.className = "controls sand-controls previous-button";
+        previousSlideBtn.addEventListener("click", throttle(() => changeSlide(-1), animationDuration));
+        createArrowIcon(previousSlideBtn);
+
         let nextSlideBtn = document.createElement("button");
-        nextSlideBtn.className = "carousel-controls next-button";
+        nextSlideBtn.className = "controls sand-controls next-button";
         nextSlideBtn.addEventListener("click", throttle(() => changeSlide(1), animationDuration));
         createArrowIcon(nextSlideBtn);
  
-        let previousSlideBtn = document.createElement("button");
-        previousSlideBtn.className = "carousel-controls previous-button";
-        previousSlideBtn.addEventListener("click", throttle(() => changeSlide(-1), animationDuration));
-        createArrowIcon(previousSlideBtn);
- 
-        carousel.appendChild(nextSlideBtn);
         carousel.appendChild(previousSlideBtn);
+        carousel.appendChild(nextSlideBtn);
  
         // Temporary fix for slides count equal to 2
         if (slides.length === 2) {
@@ -113,38 +120,36 @@ class SandCarousel {
      * Initiates the carousel
      */
     initTheCarousel() {
-        const { slides, slideDuration, animationDuration, autoplay, changeSlide, startLoop } = this;
+        const { carousel, slides, slideDuration, animationDuration, autoplay, resizable, changeSlide, setVisibilityAPI } = this;
         
         if (slides.length > 1) {
             // Sets the animation duration for the timer to the slide duration
             slides.forEach(slide => {
-                slide.style.animationDuration    = slideDuration / 1000 + 's';
-                slide.style.transitionDuration    = animationDuration / 1000 + 's';
-                slide.style.transitionDelay        = animationDuration / 1000 + 's';
+                slide.style.animationDuration   = slideDuration / 1000 + 's';
+                slide.style.transitionDuration  = animationDuration / 1000 + 's';
+                slide.style.transitionDelay     = animationDuration / 1000 + 's';
             });
+
+            if (resizable) {
+                carousel.classList.add("resizable");
+                carousel.style.transitionDuration = animationDuration / 1000 + 's';
+            }
+
+            if (autoplay) {
+                carousel.classList.add("autoplay");
+
+                // This class addition ensured that the class will be removed right away
+                // from the class toggle in startLoop() for the first few seconds (milis.)
+                // of the first slide.
+                carousel.classList.add("disabled");
+            }
+
+            // Activates the visibility API that detects if the user is on the page
+            setVisibilityAPI();
 
             // Initial slide:
             changeSlide(1);
-            if (autoplay) startLoop();
         }
-    }
- 
-    /**
-     * Starts the loop
-     */
-    startLoop() {
-        const { slideDuration, theLoop, changeSlide } = this;
- 
-        // It's important to stop the loop when this
-        // function is called because set function
-        // is called every time a slide is changed no
-        // matter if it's caused by the user or the loop
-        // and if one deosn't stop the loop it will not
-        // be overwritten.
-        if (theLoop) clearTimeout(theLoop)
-     
-        // Loops from the last slide; creates recursion
-        this.theLoopSetter = setTimeout(() => changeSlide(1) , slideDuration);
     }
  
     /**
@@ -154,7 +159,7 @@ class SandCarousel {
      * @param {number} index the index of the current slide
      */
     changeSlide(direction, index = this.currentSlide) {
-        const { slides, slideClass, autoplay, controlDots, startLoop, checkIfFirstLast, resetClasses } = this;
+        const { carousel, slides, slideClass, autoplay, resizable, controlDots, startLoop, checkIfFirstLast, resetClasses } = this;
         const slidesCount = slides.length;
  
         resetClasses(slides, slideClass);
@@ -179,10 +184,38 @@ class SandCarousel {
         else {
             slides[nextSlide].classList.add("active");
         }
-         
+
+        // Resizes the carousel to the slide's content
+        if (resizable) {
+            if (controlDots.length != 0) {
+                carousel.style.height = slides[previousSlide].offsetHeight + "px";
+            }
+            else {
+                carousel.style.height = slides[currentSlide].offsetHeight + "px";
+            }
+        }
+
         // Resets the loop from the new current slide.
         // This call is part of the recursiuon
         if (autoplay) startLoop();
+    }
+ 
+    /**
+     * Starts the loop
+     */
+    startLoop() {
+        const { carousel, slideDuration, animationDuration, theLoop, pageIsVisible, changeSlide } = this;
+        
+        // Disables the carousel during the transition animation
+        carousel.classList.toggle("disabled");
+        setTimeout(() => carousel.classList.remove("disabled"), animationDuration);
+
+        // Clears the timeout when the function is called
+        // after user's interaction with the controls
+        if (theLoop) clearTimeout(theLoop);
+     
+        // Loops from the last slide; creates recursion
+        if (pageIsVisible) this.theLoopSetter = setTimeout(() => changeSlide(1) , slideDuration);
     }
  
     /**
@@ -248,11 +281,33 @@ class SandCarousel {
             }
         }
     }
+
+    /**
+     * Sets the Page Visibilyt API that stops the
+     * carousel when the tab is switched
+     * https://developer.mozilla.org/en-US/docs/Web/API/Page_Visibility_API
+     */
+    setVisibilityAPI() {
+        const { startLoop } = this;
+        let hidden = "hidden";
+
+        const HANDLE_VISIBILITY_CHANGE = () => {
+            if (document[hidden]) {
+                this.pageIsVisibleSetter = false;
+            }
+            else {
+                this.pageIsVisibleSetter = true;
+                startLoop();
+            }
+        }
+        
+        if (hidden in document) document.addEventListener("visibilitychange", HANDLE_VISIBILITY_CHANGE);
+        else if ((hidden = "mozHidden") in document) document.addEventListener("mozvisibilitychange", HANDLE_VISIBILITY_CHANGE);
+        else if ((hidden = "webkitHidden") in document) document.addEventListener("webkitvisibilitychange", HANDLE_VISIBILITY_CHANGE);
+        else if ((hidden = "msHidden") in document) document.addEventListener("msvisibilitychange", HANDLE_VISIBILITY_CHANGE);
+        // IE 9 and lower:
+        else if ("onfocusin" in document) document.onfocusin = document.onfocusout = HANDLE_VISIBILITY_CHANGE;
+        // All others:
+        else window.onpageshow = window.onpagehide = window.onfocus = window.onblur = HANDLE_VISIBILITY_CHANGE;
+    }
 }
- 
-/**
- * TO DO:
- * 
- * 1.   Stop the carousel when the user is not on the page.
- * 2.   Add slide resize option if the slides are different size.
- */

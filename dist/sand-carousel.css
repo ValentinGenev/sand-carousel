@@ -41,7 +41,7 @@
 .sand-carousel {
   position: relative;
   width: 100%;
-  min-height: 480px;
+  height: 480px;
   margin: 0 auto;
   overflow: hidden; }
   .sand-carousel ul {
@@ -61,8 +61,6 @@
       object-position: center; }
   .sand-carousel .slide {
     position: absolute;
-    display: flex;
-    flex-direction: column;
     width: 100%;
     height: 100%;
     top: 0;
@@ -72,7 +70,7 @@
     animation-duration: 5s; }
   .sand-carousel .slide.active {
     z-index: 2 !important; }
-  .sand-carousel .slide:after {
+  .sand-carousel.autoplay .slide:after {
     display: block;
     position: absolute;
     width: 0;
@@ -87,6 +85,13 @@
 @keyframes fill {
   to {
     width: 100%; } }
+  .sand-carousel.resizable {
+    transition: height .5s ease; }
+    .sand-carousel.resizable .slide {
+      height: initial; }
+  .sand-carousel.disabled .controls {
+    pointer-events: none; }
+
 .sand-carousel.fading .slide {
   opacity: 0;
   transition-property: opacity;
@@ -127,14 +132,14 @@
   transition-timing-function: ease-in-out; }
 .sand-carousel.sliding .current-slide {
   transform: translateX(0);
-  z-index: 2; }
+  z-index: 3; }
 .sand-carousel.sliding .previous-slide {
   transform: translateX(-100%);
   z-index: 1; }
 .sand-carousel.sliding .next-slide {
   transform: translateX(100%);
   z-index: 1; }
-.sand-carousel.sliding .carousel-controls {
+.sand-carousel.sliding .controls {
   position: absolute;
   width: 2.5rem;
   height: 2.5rem;
@@ -144,20 +149,38 @@
   background-color: #fff;
   border: none;
   cursor: pointer;
-  z-index: 3; }
-  .sand-carousel.sliding .carousel-controls svg {
+  z-index: 4;
+  opacity: .65;
+  transition: opacity .25s linear; }
+  .sand-carousel.sliding .controls:hover {
+    opacity: 1; }
+  .sand-carousel.sliding .controls svg {
     height: 100%;
     width: auto; }
+    .sand-carousel.sliding .controls svg path {
+      fill: #777; }
 .sand-carousel.sliding .previous-button {
   padding-left: 0;
-  border-radius: 0 .5rem .5rem 0; }
+  border-radius: 0 .25rem .25rem 0; }
   .sand-carousel.sliding .previous-button svg {
     transform: scaleX(-1); }
 .sand-carousel.sliding .next-button {
   right: 0;
   padding-right: 0;
-  border-radius: .5rem 0 0 .5rem; }
+  border-radius: .25rem 0 0 .25rem; }
 .sand-carousel.sliding .slide.current-slide:after {
   content: ""; }
+.sand-carousel.sliding ul {
+  height: 100%; }
+  .sand-carousel.sliding ul:before {
+    content: '';
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background-color: #ddd;
+    z-index: 2; }
 
 /*# sourceMappingURL=sand-carousel.css.map */

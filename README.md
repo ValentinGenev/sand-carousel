@@ -26,10 +26,10 @@ My main goal is to make a very simple and light carousel that I can use for my p
 </ul>
 
 <!--
-  -- The two classes of the containing element —
-  -- 'sand-carousel' and 'slides-wrapper', and
-  -- the 'slide' class of the carousel's items
-  -- are required.
+  .. The two classes of the containing element —
+  .. 'sand-carousel' and 'slides-wrapper', and
+  .. the 'slide' class of the carousel's items
+  .. are required.
   -->
 ```
 3. Initiate the carousel by declaring a new instance of the `SandCarousel` class:

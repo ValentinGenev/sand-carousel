@@ -47,7 +47,7 @@ let autoPlay            = true;  // true by default
 
 const SAND_CAROUSEL     = new SandCarousel(containerSelector, singleSlideSelector, slideDuration, transitionDuration, resizable, autoPlay);
 ```
-3. Then call one of the methods `dotControls()` or `arrowControls()`:
+4. Then call one of the methods `dotControls()` or `arrowControls()`:
 ```js
 SAND_CAROUSEL.dotControls();
 ```

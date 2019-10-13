@@ -49,6 +49,7 @@
     margin: 0 auto;
     overflow: hidden;
 
+	&,
     ul {
         margin: 0;
         padding: 0;
@@ -252,8 +253,9 @@
     }
 
 	//Curtain
-	ul {
-		height: 100%;
+	&.slides-wrapper,
+	.slides-wrapper {
+		min-height: 100%;
 
 		&:before {
 			content: '';

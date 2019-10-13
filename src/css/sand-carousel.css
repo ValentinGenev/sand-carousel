@@ -44,10 +44,12 @@
   height: 480px;
   margin: 0 auto;
   overflow: hidden; }
+  .sand-carousel,
   .sand-carousel ul {
     margin: 0;
     padding: 0;
     list-style: none; }
+    .sand-carousel li,
     .sand-carousel ul li {
       margin: 0; }
   .sand-carousel figure {
@@ -170,9 +172,11 @@
   border-radius: .25rem 0 0 .25rem; }
 .sand-carousel.sliding .slide.current-slide:after {
   content: ""; }
-.sand-carousel.sliding ul {
-  height: 100%; }
-  .sand-carousel.sliding ul:before {
+.sand-carousel.sliding.slides-wrapper,
+.sand-carousel.sliding .slides-wrapper {
+  min-height: 100%; }
+  .sand-carousel.sliding.slides-wrapper:before,
+  .sand-carousel.sliding .slides-wrapper:before {
     content: '';
     position: absolute;
     display: block;

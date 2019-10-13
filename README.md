@@ -19,13 +19,18 @@ My main goal is to make a very simple and light carousel that I can use for my p
 ```
 2. The markup should look something like this:
 ```html
-<div class="sand-carousel">
-    <ul>
-        <li class="slide">Slide 1</li>
-        <li class="slide">Slide 2</li>
-        <li class="slide">Slide 3</li>
-    </ul>
-</div>
+<ul class="sand-carousel slides-wrapper">
+	<li class="slide">Slide 1</li>
+	<li class="slide">Slide 2</li>
+	<li class="slide">Slide 3</li>
+</ul>
+
+<!--
+  -- The two classes of the containing element —
+  -- 'sand-carousel' and 'slides-wrapper', and
+  -- the 'slide' class of the carousel's items
+  -- are required.
+  -->
 ```
 3. Initiate the carousel by declaring a new instance of the `SandCarousel` class:
 ```js
@@ -36,9 +41,9 @@ let transitionDuration	= 500;	 // 500ms by dafault
 let resizable           = false; // false by defailt
 let autoPlay            = true;  // true by default
 
-// NOTE! In the constructor the autoplay option is disabled if
-// the slider is resizable
-// autoplay = resizable ? false : autoplay
+// NOTE! The autoplay property in the constructor
+// is set to false if the slider is resizable
+// this.autoplay = resizable ? false : autoplay
 
 const SAND_CAROUSEL     = new SandCarousel(containerSelector, singleSlideSelector, slideDuration, transitionDuration, resizable, autoPlay);
 ```

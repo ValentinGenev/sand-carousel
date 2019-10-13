@@ -58,5 +58,4 @@ SAND_CAROUSEL.dotControls();
 - add lazy loadgin.
 
 ## Known issues
-- The sliding variation starts from the second slide;
-- I came a cross few instances when the carousel changes two slides instead of one when in resizable mode.
+- The sliding variation starts from the second slide.

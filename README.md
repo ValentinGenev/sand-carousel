@@ -20,9 +20,9 @@ My main goal is to make a very simple and light carousel that I can use for my p
 2. The markup should look something like this:
 ```html
 <ul class="sand-carousel slides-wrapper">
-	<li class="slide">Slide 1</li>
-	<li class="slide">Slide 2</li>
-	<li class="slide">Slide 3</li>
+    <li class="slide">Slide 1</li>
+    <li class="slide">Slide 2</li>
+    <li class="slide">Slide 3</li>
 </ul>
 
 <!--

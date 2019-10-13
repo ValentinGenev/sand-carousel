@@ -288,7 +288,7 @@ class SandCarousel {
      * https://developer.mozilla.org/en-US/docs/Web/API/Page_Visibility_API
      */
     setVisibilityAPI() {
-        const { startLoop } = this;
+        const { autoplay, startLoop } = this;
         let hidden = "hidden";
 
         const HANDLE_VISIBILITY_CHANGE = () => {
@@ -297,7 +297,7 @@ class SandCarousel {
             }
             else {
                 this.pageIsVisibleSetter = true;
-                startLoop();
+                if (autoplay) startLoop();
             }
         }
         

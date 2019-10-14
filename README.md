@@ -53,6 +53,3 @@ SAND_CAROUSEL.dotControls();
 - Review of the code;
 - fix the issues;
 - add lazy loadgin.
-
-## Known issues
-- The sliding variation starts from the second slide.

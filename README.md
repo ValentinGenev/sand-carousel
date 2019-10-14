@@ -29,7 +29,7 @@ My main goal is to make a very simple and light carousel that I can use for my p
 ```
 The two classes of the containing elements — `sand-carousel` and `slides-wrapper`, and the `slide` class of the carousel's items are required.
 
-**Please note** that the script is adding the carousel's controls in the element with the `sand-carosel` class. Both `sand-carousel` and `slides-wrapper` classes can be applied to one lement but that might lead to semantic inconsistencies if the containing element is a list and the slides are list items as in the markup above.
+**Please note** that the script is adding the carousel's controls in the element with the `sand-carosel` class. Both `sand-carousel` and `slides-wrapper` classes can be applied to one element but that might lead to semantic inconsistencies if the containing element is a list and the slides are list items as in the markup above.
 
 3. Initiate the carousel by declaring a new instance of the `SandCarousel` class:
 ```js

@@ -139,12 +139,12 @@ class SandCarousel {
 			slide.style.transitionDelay     = animationDuration / 1000 + 's';
 		});
 
-		if (resizable) {
+		if (resizable == true) {
 			carousel.classList.add("resizable");
 			carousel.style.transitionDuration = animationDuration / 1000 + 's';
 		}
 
-		if (autoplay) {
+		if (autoplay == true) {
 			carousel.classList.add("autoplay");
 
 			// This class addition ensured that the class will be removed right away
@@ -194,7 +194,7 @@ class SandCarousel {
         }
 
         // Resizes the carousel to the slide's content
-        if (resizable) {
+        if (resizable == true) {
             if (controlDots.length != 0) {
                 carousel.style.height = slides[previousSlide].offsetHeight + "px";
             }
@@ -205,7 +205,7 @@ class SandCarousel {
 
         // Resets the loop from the new current slide.
         // This call is part of the recursiuon
-        if (autoplay) startLoop();
+        if (autoplay == true) startLoop();
     }
  
     /**
@@ -305,7 +305,7 @@ class SandCarousel {
             }
             else {
                 this.pageIsVisibleSetter = true;
-                if (autoplay) startLoop();
+                if (autoplay == true) startLoop();
             }
         }
         

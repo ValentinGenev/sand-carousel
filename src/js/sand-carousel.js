@@ -55,7 +55,7 @@ class SandCarousel {
     dotControls() {
         const { carousel, slides, animationDuration, initTheCarousel, changeSlide, throttle } = this;
  
-		if (slide.length > 1) {
+		if (slides.length > 1) {
 			// The animation:
 			carousel.classList.add("fading");
 	
@@ -86,7 +86,7 @@ class SandCarousel {
     arrowControls() {
         const { carousel, slides, animationDuration, initTheCarousel, changeSlide, createArrowIcon, throttle } = this;
 
-		if (slide.length > 1) {
+		if (slides.length > 1) {
 			// The animation:
 			carousel.classList.add("sliding");
 	

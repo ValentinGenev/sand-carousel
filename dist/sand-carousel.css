@@ -1,5 +1,5 @@
 /****************************************************
- * Helper Classes:                                    *
+ * Helper Classes:                                  *
  ****************************************************/
 .screen-reader-text {
   border: 0;
@@ -54,6 +54,7 @@
       margin: 0; }
   .sand-carousel figure {
     position: relative;
+    margin: 0;
     flex-grow: 1; }
     .sand-carousel figure img {
       position: absolute;
@@ -63,6 +64,8 @@
       object-position: center; }
   .sand-carousel .slide {
     position: absolute;
+    display: flex;
+    flex-direction: column;
     width: 100%;
     height: 100%;
     top: 0;
@@ -93,6 +96,8 @@
       height: initial; }
   .sand-carousel.disabled .controls {
     pointer-events: none; }
+  .sand-carousel.one-slide.sliding .slides-wrapper:before {
+    content: none; }
 
 .sand-carousel.fading .slide {
   opacity: 0;

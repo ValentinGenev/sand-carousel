@@ -61,6 +61,7 @@
     }
     figure {
         position: relative;
+		margin: 0;
         flex-grow: 1;
         
         img {
@@ -124,6 +125,11 @@
 	// animation
 	&.disabled .controls {
 		pointer-events: none;
+	}
+
+	// One slide in the slider
+	&.one-slide.sliding .slides-wrapper:before {
+		content: none;
 	}
 }
 

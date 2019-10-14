@@ -54,6 +54,7 @@
       margin: 0; }
   .sand-carousel figure {
     position: relative;
+    margin: 0;
     flex-grow: 1; }
     .sand-carousel figure img {
       position: absolute;
@@ -95,6 +96,8 @@
       height: initial; }
   .sand-carousel.disabled .controls {
     pointer-events: none; }
+  .sand-carousel.one-slide.sliding .slides-wrapper:before {
+    content: none; }
 
 .sand-carousel.fading .slide {
   opacity: 0;

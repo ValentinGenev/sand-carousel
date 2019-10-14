@@ -55,24 +55,29 @@ class SandCarousel {
     dotControls() {
         const { carousel, slides, animationDuration, initTheCarousel, changeSlide, throttle } = this;
  
-        // The animation:
-        carousel.classList.add("fading");
- 
-        // The controls
-        let contorlsContainer       = document.createElement("ul");
-        contorlsContainer.className = "controls";
- 
-        if (slides.length > 1) slides.forEach((_slide, key) => {
-            let controlsItem = document.createElement("li");
-             
-            controlsItem.addEventListener("click", throttle(() => changeSlide(1, key), animationDuration)); 
-            contorlsContainer.appendChild(controlsItem);
-        });
-        carousel.appendChild(contorlsContainer);
- 
-        this.controlDotsSetter = document.querySelectorAll(".controls li");
+		if (slide.length > 1) {
+			// The animation:
+			carousel.classList.add("fading");
+	
+			// The controls
+			let contorlsContainer       = document.createElement("ul");
+			contorlsContainer.className = "controls";
+	
+			if (slides.length > 1) slides.forEach((_slide, key) => {
+				let controlsItem = document.createElement("li");
+				
+				controlsItem.addEventListener("click", throttle(() => changeSlide(1, key), animationDuration)); 
+				contorlsContainer.appendChild(controlsItem);
+			});
+			carousel.appendChild(contorlsContainer);
+	
+			this.controlDotsSetter = document.querySelectorAll(".controls li");
 
-        initTheCarousel();
+			initTheCarousel();
+		}
+		else {
+			carousel.classList.add("one-slide");
+		}
     }
  
     /**
@@ -80,40 +85,45 @@ class SandCarousel {
      */
     arrowControls() {
         const { carousel, slides, animationDuration, initTheCarousel, changeSlide, createArrowIcon, throttle } = this;
- 
-        // The animation:
-        carousel.classList.add("sliding");
- 
-        // The controls:
-        let previousSlideBtn = document.createElement("button");
-        previousSlideBtn.className = "controls sand-controls previous-button";
-        previousSlideBtn.addEventListener("click", throttle(() => changeSlide(-1), animationDuration));
-        createArrowIcon(previousSlideBtn);
 
-        let nextSlideBtn = document.createElement("button");
-        nextSlideBtn.className = "controls sand-controls next-button";
-        nextSlideBtn.addEventListener("click", throttle(() => changeSlide(1), animationDuration));
-        createArrowIcon(nextSlideBtn);
- 
-        carousel.appendChild(previousSlideBtn);
-        carousel.appendChild(nextSlideBtn);
- 
-        // Temporary fix for slides count equal to 2
-        if (slides.length === 2) {
-            let slidesDuplicates = [];
-            // If the slides count is equal to 2 I need to copy
-            // the two slides so I can use the "previous-slide",
-            // "current-slide", "next-slide" structure
-            slides.forEach(slide => {
-                let slideDuplicate = slide.cloneNode(true);
-                slide.parentNode.appendChild(slideDuplicate);
-            });
- 
-            // Updates the slides' Node List variable with the newly added ones
-            this.slidesSetter = slides[0].parentNode.querySelectorAll(".slide");
+		if (slide.length > 1) {
+			// The animation:
+			carousel.classList.add("sliding");
+	
+			// The controls:
+			let previousSlideBtn = document.createElement("button");
+			previousSlideBtn.className = "controls sand-controls previous-button";
+			previousSlideBtn.addEventListener("click", throttle(() => changeSlide(-1), animationDuration));
+			createArrowIcon(previousSlideBtn);
+
+			let nextSlideBtn = document.createElement("button");
+			nextSlideBtn.className = "controls sand-controls next-button";
+			nextSlideBtn.addEventListener("click", throttle(() => changeSlide(1), animationDuration));
+			createArrowIcon(nextSlideBtn);
+	
+			carousel.appendChild(previousSlideBtn);
+			carousel.appendChild(nextSlideBtn);
+	
+			// Temporary fix for slides count equal to 2
+			if (slides.length === 2) {
+				let slidesDuplicates = [];
+				// If the slides count is equal to 2 I need to copy
+				// the two slides so I can use the "previous-slide",
+				// "current-slide", "next-slide" structure
+				slides.forEach(slide => {
+					let slideDuplicate = slide.cloneNode(true);
+					slide.parentNode.appendChild(slideDuplicate);
+				});
+	
+				// Updates the slides' Node List variable with the newly added ones
+				this.slidesSetter = slides[0].parentNode.querySelectorAll(".slide");
+			}
+
+			initTheCarousel();
         }
-
-        initTheCarousel();
+		else {
+			carousel.classList.add("one-slide");
+		}
     }
 
     /**
@@ -122,34 +132,32 @@ class SandCarousel {
     initTheCarousel() {
         const { carousel, slides, slideDuration, animationDuration, autoplay, resizable, changeSlide, setVisibilityAPI } = this;
         
-        if (slides.length > 1) {
-            // Sets the animation duration for the timer to the slide duration
-            slides.forEach(slide => {
-                slide.style.animationDuration   = slideDuration / 1000 + 's';
-                slide.style.transitionDuration  = animationDuration / 1000 + 's';
-                slide.style.transitionDelay     = animationDuration / 1000 + 's';
-            });
+		// Sets the animation duration for the timer to the slide duration
+		slides.forEach(slide => {
+			slide.style.animationDuration   = slideDuration / 1000 + 's';
+			slide.style.transitionDuration  = animationDuration / 1000 + 's';
+			slide.style.transitionDelay     = animationDuration / 1000 + 's';
+		});
 
-            if (resizable) {
-                carousel.classList.add("resizable");
-                carousel.style.transitionDuration = animationDuration / 1000 + 's';
-            }
+		if (resizable) {
+			carousel.classList.add("resizable");
+			carousel.style.transitionDuration = animationDuration / 1000 + 's';
+		}
 
-            if (autoplay) {
-                carousel.classList.add("autoplay");
+		if (autoplay) {
+			carousel.classList.add("autoplay");
 
-                // This class addition ensured that the class will be removed right away
-                // from the class toggle in startLoop() for the first few seconds (milis.)
-                // of the first slide.
-                carousel.classList.add("disabled");
-            }
+			// This class addition ensured that the class will be removed right away
+			// from the class toggle in startLoop() for the first few seconds (milis.)
+			// of the first slide.
+			carousel.classList.add("disabled");
+		}
 
-            // Activates the visibility API that detects if the user is on the page
-            setVisibilityAPI();
+		// Activates the visibility API that detects if the user is on the page
+		setVisibilityAPI();
 
-            // Initial slide:
-            changeSlide(1);
-        }
+		// Initial slide:
+		changeSlide(1);
     }
  
     /**

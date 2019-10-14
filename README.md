@@ -17,11 +17,9 @@ My main goal is to make a very simple and light carousel that I can use for my p
     <script src="sand-carousel.js"></script>
 </body>
 ```
-2. The markup should look similar to the example below.
-
-    *The two classes of the containing elements — `sand-carousel` and `slides-wrapper`, and the `slide` class of the carousel's items are required.*
+2. Add the required classes `sand-carousel` and `slides-wrapper` to the containing elements and `slide` class to the carousel's items to a markup similar to the one below.
     
-    **Please note** that the script is adding the carousel's controls in the element with the `sand-carosel` class. Both `sand-carousel` and `slides-wrapper` classes can be applied to one element but that might lead to semantic inconsistencies if the containing element is a list and the slides are list items as in the markup above.
+    **Please note** that the script is adding the carousel's controls in the element with the `sand-carosel` class. Both `sand-carousel` and `slides-wrapper` classes can be applied to one element but that might lead to semantic inconsistencies if the containing element is a list and the slides are list items as in the markup below.
 ```html
 <div class="sand-carousel">
     <ul class="slides-wrapper">

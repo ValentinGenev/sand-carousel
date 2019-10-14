@@ -1,5 +1,5 @@
 /****************************************************
- * Helper Classes:                                    *
+ * Helper Classes:                                  *
  ****************************************************/
 .screen-reader-text {
   border: 0;
@@ -63,6 +63,8 @@
       object-position: center; }
   .sand-carousel .slide {
     position: absolute;
+    display: flex;
+    flex-direction: column;
     width: 100%;
     height: 100%;
     top: 0;

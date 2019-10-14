@@ -1,5 +1,5 @@
 /****************************************************
- * Helper Classes:                                    *
+ * Helper Classes:                                  *
  ****************************************************/
 
  // As read here: https://make.wordpress.org/accessibility/2015/02/09/hiding-text-for-screen-readers-with-wordpress-core/
@@ -75,6 +75,8 @@
     // Slide styles
     .slide {
         position: absolute;
+		display: flex;
+		flex-direction: column;
         width: 100%;
         height: 100%;
         top: 0;

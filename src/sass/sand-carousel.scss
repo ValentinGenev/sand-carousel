@@ -88,6 +88,13 @@
         // The timer pseudo-element will inherit
         // its duration from this property.
         animation-duration: 5s;
+
+		// Containing anchor elements
+		& > a {
+			display: inherit;
+			flex-direction: inherit;
+			height: inherit;
+		}
     }
     .slide.active {
         z-index: 2 !important;

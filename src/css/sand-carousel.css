@@ -73,6 +73,10 @@
     z-index: 1;
     background-color: #fff;
     animation-duration: 5s; }
+    .sand-carousel .slide > a {
+      display: inherit;
+      flex-direction: inherit;
+      height: inherit; }
   .sand-carousel .slide.active {
     z-index: 2 !important; }
   .sand-carousel.autoplay .slide:after {

@@ -134,6 +134,8 @@
     background-color: #fff; }
 .sand-carousel.fading .slide.active:after {
   content: ""; }
+.sand-carousel.fading.disabled {
+  pointer-events: none; }
 
 .sand-carousel.sliding .slide {
   opacity: 1;

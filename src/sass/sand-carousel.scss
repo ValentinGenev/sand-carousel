@@ -188,6 +188,12 @@
     .slide.active:after {
         content: "";
     }
+
+	// Disables the carousel during the transition
+	// animation
+	&.disabled {
+		pointer-events: none;
+	}
 }
 
 

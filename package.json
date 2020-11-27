@@ -1,0 +1,30 @@
+{
+  "name": "sand-carousel",
+  "version": "1.0.0",
+  "description": "A simple JavaScript carousel.",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+		"babel": "babel src/js -d dist",
+		"sass": "sass src/sass:dist -s compressed"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ValentinGenev/sand-carousel.git"
+  },
+  "author": "Valentin Genev",
+  "homepage": "https://github.com/ValentinGenev/sand-carousel#readme",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ValentinGenev/sand-carousel/issues"
+  },
+  "keywords": [
+    "carousel-slider",
+    "carousel",
+    "slider"
+  ],
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "sass": "^1.29.0"
+  }
+}

@@ -1,0 +1,29 @@
+# Check if dist is read
+
+name: Is code compiled and minified
+
+# Specifies when the action is going to be triggered
+on:
+  pull_request_target:
+
+jobs:
+  sanitize_code:
+    name: Check if code is compiled and minified
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout the repo
+        uses: actions/checkout@v2.3.4
+
+      - name: Check files count in ./dist/
+        env:
+          DIST_DIR: ./dist
+          MIN_NUM: 2
+        run: |
+          filesInDist=$(find $DIST_DIR -maxdepth 1 -type f|wc -l)
+
+          if (( $filesInDist > $MIN_NUM )); then
+            echo "Distribution files are present."
+          else
+            exit 1
+          fi

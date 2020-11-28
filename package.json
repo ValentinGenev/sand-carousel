@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "description": "A simple JavaScript carousel.",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
 		"babel": "babel src/js -d dist",
-		"sass": "sass src/sass:dist -s compressed"
+		"sass": "sass src/sass:dist -s compressed",
+		"compile": "babel src/js -d dist && sass src/sass:dist -s compressed"
   },
   "repository": {
     "type": "git",

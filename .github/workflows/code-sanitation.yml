@@ -5,10 +5,12 @@ name: Code Sanitation
 
 # Specifies when the action is going to be triggered
 on:
-  # Trigger the workflow on push to the master branch
-  push:
-    branches:
-      - master
+  pull_request:
+    branches: [master]
+
+  pull_request_review:
+    types: [submitted]
+    branches: [master]
 
   # Manual trigger for testin purposes
   workflow_dispatch:
@@ -26,18 +28,19 @@ jobs:
       - name: Install NPM packages
         run: npm install -D
 
-      - name: Run SASS
-        run: npm run sass
-        
-      - name: Run Babel
-        run: npm run babel
+      - name: Compile and sanitize code
+        run: |
+          npm run compile
 
-      - name: Commits dist/ to master
+          # GitHub like identation with spaces more
+          bash .github/workflows/code-sanitation/tabs-to-spaces.sh '*.scss *.js' 2
+
+      - name: Commits changes to current branch
         run: |
           git config --global user.email "${{ secrets.USER_NAME }}" 
           git config --global user.name "${{ secrets.USER_EMAIL }}"
-          mv .gitignore gitignore
-          git add dist
-          mv gitignore .gitignore
-          git commit -m "[=] dist/ updated;"
-          git push origin master
+
+          git status
+          git add -A
+          git commit -m "[=] tabs replaced with spaces;"
+          git push origin ${GITHUB_REF##*/}

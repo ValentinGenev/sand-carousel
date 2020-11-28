@@ -5,9 +5,7 @@ name: Code Sanitation
 
 # Specifies when the action is going to be triggered
 on:
-  # Trigger the workflow on push to the master branch
   pull_request:
-    types: [open, reopened]
     branches: [master]
 
   pull_request_review:
@@ -37,7 +35,7 @@ jobs:
           # GitHub like identation with spaces more
           bash .github/workflows/code-sanitation/tabs-to-spaces.sh '*.scss *.js' 2
 
-      - name: Commits dist/ to current branch
+      - name: Commits changes to current branch
         run: |
           git config --global user.email "${{ secrets.USER_NAME }}" 
           git config --global user.name "${{ secrets.USER_EMAIL }}"

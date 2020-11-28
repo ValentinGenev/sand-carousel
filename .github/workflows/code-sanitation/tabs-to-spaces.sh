@@ -22,6 +22,5 @@ export -f replace_tabs_with_n_spaces
 echo -e "\nReplacing tabs with spaces"
 for i in "${file_tpes[@]}"
 do :
-	echo $i
 	exec_for_files "$i" "replace_tabs_with_n_spaces $ident_size"
 done

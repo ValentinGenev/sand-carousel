@@ -43,6 +43,7 @@ jobs:
           git status
           git add -A
           git commit -m "[=] sanitation complete;"
+          git push origin ${GITHUB_REF##*/}
 
           # Shuashes the last two commits and pushes them to the branch
           git rebase ${GITHUB_REF##*/}~2 --autosquash 

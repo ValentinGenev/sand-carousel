@@ -37,11 +37,13 @@ jobs:
 
       - name: Commits changes to current branch
         run: |
-          echo ${GITHUB_REF##*/}
           git config --global user.email "sanitation-bot@users.noreply.github.com" 
           git config --global user.name "Sanitation Bot"
 
           git status
           git add -A
           git commit -m "[=] sanitation complete;"
-          git push origin HEAD:${GITHUB_REF##*/}
+          git push origin ${GITHUB_REF##*/}
+
+          # Shuash the last two commits
+          git rebase HEAD~2

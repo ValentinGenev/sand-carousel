@@ -4,7 +4,8 @@ name: Is code compiled and minified
 
 # Specifies when the action is going to be triggered
 on:
-  pull_request_target:
+  pull_request:
+    branches: [main]
 
 jobs:
   sanitize_code:

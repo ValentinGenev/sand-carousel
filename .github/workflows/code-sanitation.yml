@@ -10,6 +10,8 @@ name: Code Sanitation
 
 # Specifies when the action is going to be triggered
 on:
+  pull_request_target:
+    types: [ready_for_review]
   workflow_dispatch:
   
 

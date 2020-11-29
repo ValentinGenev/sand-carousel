@@ -6,13 +6,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 var SandCarousel = function () {
   /** 
-  * @param {string} carousel a string of the selector for the carousel
-  * @param {string} slides a string of the selector for the slided
-  * @param {number} slideDuration the time it takes for the slide change animation to finish (see the transitions in the CSS file)
-  * @param {number} animationDuration
-  * @param {boolean} autoplay
-  * @param {boolean} resizable 
-  */
+   * @param {string} carousel a string of the selector for the carousel
+   * @param {string} slides a string of the selector for the slided
+   * @param {number} slideDuration the time it takes for the slide change animation to finish (see the transitions in the CSS file)
+   * @param {number} animationDuration
+   * @param {boolean} autoplay
+   * @param {boolean} resizable 
+   */
   function SandCarousel(carousel, slides, slideDuration) {
     var animationDuration = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 500;
     var resizable = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : false;
@@ -50,8 +50,8 @@ var SandCarousel = function () {
 
 
     /**
-   * Initiates the carousel with dot controls and fade animation
-   */
+     * Initiates the carousel with dot controls and fade animation
+     */
     value: function dotControls() {
       var carousel = this.carousel,
           slides = this.slides,
@@ -88,8 +88,8 @@ var SandCarousel = function () {
     }
 
     /**
-   * Initiates the carousel with arrow controls and slide animation
-   */
+     * Initiates the carousel with arrow controls and slide animation
+     */
 
   }, {
     key: "arrowControls",
@@ -147,8 +147,8 @@ var SandCarousel = function () {
     }
 
     /**
-   * Initiates the carousel
-   */
+     * Initiates the carousel
+     */
 
   }, {
     key: "initTheCarousel",
@@ -192,11 +192,11 @@ var SandCarousel = function () {
     }
 
     /**
-   * Changes the slide
-   * 
-   * @param {number} direction -1 or 1 for "previois" and "next" slide
-   * @param {number} index the index of the current slide
-   */
+     * Changes the slide
+     * 
+     * @param {number} direction -1 or 1 for "previois" and "next" slide
+     * @param {number} index the index of the current slide
+     */
 
   }, {
     key: "changeSlide",
@@ -251,8 +251,8 @@ var SandCarousel = function () {
     }
 
     /**
-   * Starts the loop
-   */
+     * Starts the loop
+     */
 
   }, {
     key: "startLoop",
@@ -282,14 +282,14 @@ var SandCarousel = function () {
     }
 
     /**
-   * Checks if the current slide is first or rast
-   * 
-   * @param {number} index current slide
-   * @param {number} listCount the number of slides
-   * @param {number} direction -1 or 1 for "previois" and "next" slide
-   * 
-   * @returns returns the index ot the next slide according to the direction
-   */
+     * Checks if the current slide is first or rast
+     * 
+     * @param {number} index current slide
+     * @param {number} listCount the number of slides
+     * @param {number} direction -1 or 1 for "previois" and "next" slide
+     * 
+     * @returns returns the index ot the next slide according to the direction
+     */
 
   }, {
     key: "checkIfFirstLast",
@@ -298,11 +298,11 @@ var SandCarousel = function () {
     }
 
     /**
-   * Resets the className to a given string
-   * 
-   * @param {NodeList} elements
-   * @param {string} className 
-   */
+     * Resets the className to a given string
+     * 
+     * @param {NodeList} elements
+     * @param {string} className 
+     */
 
   }, {
     key: "resetClasses",
@@ -313,10 +313,10 @@ var SandCarousel = function () {
     }
 
     /**
-   * Creates a SVG element and appends it to an element
-   * 
-   * @param {Node} element
-   */
+     * Creates a SVG element and appends it to an element
+     * 
+     * @param {Node} element
+     */
 
   }, {
     key: "createArrowIcon",
@@ -336,13 +336,13 @@ var SandCarousel = function () {
     }
 
     /**
-   * The throttle function
-   * Many thanks to Jonathan Sampson
-   * https://jsfiddle.net/jonathansampson/m7G64/
-   * 
-   * @param {function} callback the function that should be called with delay
-   * @param {number} limit the delay
-   */
+     * The throttle function
+     * Many thanks to Jonathan Sampson
+     * https://jsfiddle.net/jonathansampson/m7G64/
+     * 
+     * @param {function} callback the function that should be called with delay
+     * @param {number} limit the delay
+     */
 
   }, {
     key: "throttle",
@@ -360,10 +360,10 @@ var SandCarousel = function () {
     }
 
     /**
-   * Sets the Page Visibilyt API that stops the
-   * carousel when the tab is switched
-   * https://developer.mozilla.org/en-US/docs/Web/API/Page_Visibility_API
-   */
+     * Sets the Page Visibilyt API that stops the
+     * carousel when the tab is switched
+     * https://developer.mozilla.org/en-US/docs/Web/API/Page_Visibility_API
+     */
 
   }, {
     key: "setVisibilityAPI",
